@@ -93,8 +93,8 @@ class WelcomeController < ApplicationController
     email = params['email']
 
     begin
-      Intercom::User.create(:email => email, :created_at => Time.now())
-      Intercom::Tag.create(:name => 'Newsletter', :emails => [email], :tag_or_untag => 'tag')
+      # Intercom::User.create(:email => email, :created_at => Time.now())
+      # Intercom::Tag.create(:name => 'Newsletter', :emails => [email], :tag_or_untag => 'tag')
 
       list = mailchimp.lists.list({:filters => {:list_name => ENV['MAILCHIMP_LIST']}})
       raise "Unable to retrieve list id from MailChimp API." if list.nil? or list["status"] == "error"
