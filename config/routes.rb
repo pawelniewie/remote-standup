@@ -11,7 +11,6 @@ Public::Application.routes.draw do
   get "contact" => 'welcome#contact'
   post "contact" => 'welcome#message'
   get "blog" => 'welcome#blog'
-  get "demo" => 'welcome#demo'
   get "features" => 'welcome#features'
   get "pricing" => 'welcome#pricing'
   get "terms" => 'welcome#terms'
