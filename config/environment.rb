@@ -10,6 +10,6 @@ end
 
 ENV['COOKIE_DOMAIN'] ||= ''
 
-%w{GOOGLE_ANALYTICS INTERCOM_APP_ID INTERCOM_KEY MIXPANEL_APP_ID}.each do |var|
+%w{GOOGLE_ANALYTICS MIXPANEL_APP_ID}.each do |var|
 	puts "missing env var (some features will be disabled): #{var}" unless ENV[var]
 end

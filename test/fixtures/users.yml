@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  uuid: MyString
+  email: MyString
+  full_name: MyString
+  calling_name: MyString
+  picture: MyString
+  google_token: MyString
+  google_token_expires: 2014-02-27 06:55:26
+  male: false
+  public_uuid: MyString
+
+two:
+  uuid: MyString
+  email: MyString
+  full_name: MyString
+  calling_name: MyString
+  picture: MyString
+  google_token: MyString
+  google_token_expires: 2014-02-27 06:55:26
+  male: false
+  public_uuid: MyString
