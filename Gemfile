@@ -7,6 +7,12 @@ gem 'rails', '~> 4.0.2'
 # Google Analytics
 gem 'rack-google-analytics'
 
+# Authentication
+gem 'oauth2'
+
+# Database
+gem 'pg'
+
 # Smart ENV management
 gem 'figaro'
 
@@ -31,7 +37,6 @@ gem 'jbuilder', '~> 1.2'
 # Logging to stdout by default
 gem 'rails_stdout_logging'
 
-# Mails
 # Mails
 gem 'gibbon'
 gem 'intercom-rails', '~> 0.2.24'

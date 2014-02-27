@@ -1,0 +1,13 @@
+development:
+  adapter: postgresql
+  database: rs-dev
+  username: remotestandup
+  password: remotestandup
+  host: localhost
+
+test:
+  adapter: postgresql
+  database: rs-test
+  username: remotestandup
+  password: remotestandup
+  host: localhost

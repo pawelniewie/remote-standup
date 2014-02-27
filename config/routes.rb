@@ -19,6 +19,12 @@ Public::Application.routes.draw do
   post "download" => 'welcome#download'
   get "download" => 'welcome#s3'
 
+  get 'login' => 'login#index'
+  get 'login/google' => 'login#google'
+  get 'login/google_callback' => 'login#google_callback'
+  get 'logout' => 'login#logout'
+
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
