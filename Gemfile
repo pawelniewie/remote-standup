@@ -50,6 +50,8 @@ gem 'font-awesome-rails'
 gem 'angularjs-rails'
 gem 'angular-ui-bootstrap-rails'
 
+gem 'detect_timezone_rails'
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false

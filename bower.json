@@ -1,0 +1,8 @@
+{
+  "name": "remotestandup",
+  "dependencies": {
+    "angular-underscore": "*",
+    "angular-filters": "*",
+    "underscore": "*"
+  }
+}
