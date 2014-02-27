@@ -1,12 +1,15 @@
-class LoginController < ActionController::Base
+class LoginController < ApplicationController
 	before_action :set_google, only: [:google, :google_callback]
 
 	def index
+		flash[:notice] = 'You have been logged out'
+		redirect_to :controller => 'welcome'
 	end
 
 	def logout
 		session[:user_id] = nil
-		redirect_to :controller => 'login'
+		flash[:notice] = 'You have been logged out'
+		redirect_to :controller => 'welcome'
 	end
 
 	def google

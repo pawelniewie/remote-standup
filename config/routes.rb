@@ -24,6 +24,7 @@ Public::Application.routes.draw do
   get 'login/google_callback' => 'login#google_callback'
   get 'logout' => 'login#logout'
 
+  get 'settings' => 'settings#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

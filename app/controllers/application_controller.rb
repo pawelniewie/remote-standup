@@ -24,4 +24,19 @@ class ApplicationController < ActionController::Base
     render :nothing => true, :status => :accepted
   end
 
+  def user_id
+    session[:user_id]
+  end
+
+  def load_user
+    if not user_id.nil?
+      @user = ::User.where({ :id => user_id }).first
+      if @user.nil?
+        redirect_to(:controller => 'login') and return false
+      end
+    else
+      redirect_to(:controller => 'login') and return false
+    end
+  end
+
 end

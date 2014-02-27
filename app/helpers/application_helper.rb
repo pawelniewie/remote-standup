@@ -11,4 +11,9 @@ module ApplicationHelper
 	def body_class
     [controller_name, action_name].join('-')
   end
+
+  def user_id
+  	session[:user_id]
+  end
+
 end
