@@ -45,7 +45,10 @@
 
 		!= yield
 
-		= render :partial => 'ending_wrapper'
+		-unless user_id
+			= render :partial => 'ending_wrapper'
+
+		!=javascript_include_tag 'application'
 
 		- if mixpanel_id
 			:javascript

@@ -1,19 +1,20 @@
-#content-below.wrapper
-  .container
-    .row
-      .upsell
-        %small.muted
-          99% Uptime
-          %span.spacer //
-          Email Support
-          %span.spacer //
-          Free plan available
-          %span.spacer //
-          Use it by email
-          %span.spacer //
-        %a.btn.btn-primary{href: pricing_path}
-          Start your Free Trial Today!
-          %i.fa.fa-arrow-right
+-unless user_id
+  #content-below.wrapper
+    .container
+      .row
+        .upsell
+          %small.muted
+            99% Uptime
+            %span.spacer //
+            Email Support
+            %span.spacer //
+            Free plan available
+            %span.spacer //
+            Use it by email
+            %span.spacer //
+          %a.btn.btn-primary{href: pricing_path}
+            Start your Free Trial Today!
+            %i.fa.fa-arrow-right
 / FOOTER
 %footer#footer
   .container
@@ -180,6 +181,3 @@
           %br/
           %small
             %a{href: "#"} Forgotten password?
-
-/ Scripts
-!=javascript_include_tag 'application'
