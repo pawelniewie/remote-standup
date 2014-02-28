@@ -1,11 +1,11 @@
 class CreateUsers < ActiveRecord::Migration
   def change
     create_table :users, id: :uuid do |t|
-      t.string :email
-      t.string :full_name
-      t.string :calling_name
-      t.string :picture
-      t.string :google_token
+      t.text :email, {null: false}
+      t.text :full_name, {null: false, default: ''}
+      t.text :calling_name, {null: false, default: ''}
+      t.text :picture, {null: false, default: ''}
+      t.text :google_token, {null: false, default: ''}
       t.timestamp :google_token_expires
       t.boolean :male
 

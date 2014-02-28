@@ -12,8 +12,8 @@ module ApplicationHelper
     [controller_name, action_name].join('-')
   end
 
-  def user_id
-  	session[:user_id]
+  def logged_in?
+  	session[:user_id].nil?
   end
 
 end

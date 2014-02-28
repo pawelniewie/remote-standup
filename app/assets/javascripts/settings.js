@@ -75,7 +75,17 @@ angular.module('remotestandup.settings', [
 
 	$scope.saveSettings = function() {
 		$scope.loading = true;
-		$http.put('/settings', {settings: $scope.settings})
+		var settings = angular.copy($scope.settings);
+		if (settings.reminder_at) {
+			var dc = settings.reminder_at.indexOf(':');
+			if (dc != -1) {
+				settings.reminder_at_h = +settings.reminder_at.substring(0, dc);
+				settings.reminder_at_m = +settings.reminder_at.substring(dc + 1);
+				delete settings.reminder_at;
+			}
+		}
+
+		$http.put('/settings', {settings: settings})
 			.then(function(data) {
 				$scope.settings = data;
 			})

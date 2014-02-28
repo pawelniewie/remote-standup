@@ -16,7 +16,7 @@
 
 			.form-group
 				%label.control-label{for: "time"} When to send you a reminder?
-				%input.form-control#time{name: 'time', type: 'time', 'ng-model' => 'settings.reminder_at', 'required' => '', 'validate-time' => '', placeholder: 'Enter time in 24 hours format like 17:00'}
+				%input.form-control#time{name: 'time', type: 'time', 'ng-model' => 'settings.reminder_at', 'required' => '', 'validate-time' => '', placeholder: 'Enter time in 24 hours format like 17:00	'}
 				%small.error{"ng-show" => "settingsForm.time.$error.validateTime"} Please tell us the right time to contact you
 				%small.error{"ng-show" => "settingsForm.time.$error.time"} Please tell us the right time to contact you
 
