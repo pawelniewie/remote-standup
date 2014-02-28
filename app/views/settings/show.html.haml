@@ -1,0 +1,51 @@
+#content
+	.container
+		%h2.title-divider
+			%span
+				Settings
+			%small Couple of things to make it work!
+
+		%p When you're done click Submit to save them and send a first reminder to yourself (just to try it out).
+
+		%p Your response will be automatically forwarded to your peers (if you configure any) or saved on our servers so you can easily go back to it.
+
+		%form{role: "form", :name => 'settingsForm', 'ng-app' => 'remotestandup.settings', 'ng-controller' => 'SettingsCtrl', 'ng-cloak' => '', 'ng-submit' => 'saveSettings()'}
+			.form-group
+				%label{for: "timezone"} What's your timezone?
+				%select#timezone.form-control{'ng-model' => 'settings.timezone', "ng-options" => "z for z in timezones", required: ""}
+
+			.form-group
+				%label.control-label{for: "time"} When to send you a reminder?
+				%input.form-control#time{name: 'time', type: 'time', 'ng-model' => 'settings.reminder_at', 'required' => '', 'validate-time' => '', placeholder: 'Enter time in 24 hours format like 17:00'}
+				%small.error{"ng-show" => "settingsForm.time.$error.validateTime"} Please tell us the right time to contact you
+				%small.error{"ng-show" => "settingsForm.time.$error.time"} Please tell us the right time to contact you
+
+			.form-group
+				%label{for: "days1"} What days do you work on?
+				.radio
+					%label
+						%input#days1{type: "radio", 'ng-model' => 'settings.remind_on', value: "1-5"}/
+						From Monday to Friday
+				.radio
+					%label
+						%input#days2{type: "radio", 'ng-model' => 'settings.remind_on', value: "7"}/
+						Every day
+
+			.form-group
+				%label{for: "member"} Who to send it to?
+				%input#member.form-control{placeholder: "Fill in and press Enter to add a recipient", type: "email", :name => 'member','ng-model' => 'member', 'ng-keydown' => 'memberKeyDown($event)'}/
+				%small.error{"ng-show" => "settingsForm.member.$error.email"} That is not a valid email address
+
+			.form-group
+				%label{for: "members"} Recipients
+				#members
+					%p.form-control-static{'ng-repeat' => 'member in settings.members', 'ng-show' => 'settings.members.length > 0'}
+						{{member}}
+						%a{'ng-click' => 'removeMember(member)', :title => 'Remove'}
+							%span.glyphicon.glyphicon-remove-circle
+					%p.form-control-static{'ng-show' => '!settings.members || settings.members.length == 0'} You didn't set any team members yet.
+
+			%button.btn.btn-primary{type: "button", 'ng-disabled' => 'loading || settingsForm.$invalid', 'ng-click' => 'saveSettings()'}
+				Submit
+				%i.fa.fa-spinner.fa-spin{:'ng-show' => 'loading'}
+			%small{'ng-show' => 'settingsForm.$invalid'} There are errors in the form

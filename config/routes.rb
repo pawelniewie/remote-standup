@@ -16,15 +16,14 @@ Public::Application.routes.draw do
   get "terms" => 'welcome#terms'
   get "privacy" => 'welcome#privacy'
   post "newsletter" => 'welcome#newsletter'
-  post "download" => 'welcome#download'
-  get "download" => 'welcome#s3'
 
   get 'login' => 'login#index'
   get 'login/google' => 'login#google'
   get 'login/google_callback' => 'login#google_callback'
   get 'logout' => 'login#logout'
 
-  get 'settings' => 'settings#index'
+  get 'settings' => 'settings#show'
+  put 'settings' => 'settings#update'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

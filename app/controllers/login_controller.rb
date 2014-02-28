@@ -39,7 +39,7 @@ class LoginController < ApplicationController
 	  end
 
 	  session[:user_id] = user.id.to_s
-	  redirect_to :controller => 'settings'
+	  redirect_to :controller => 'settings', :action => 'show'
 	end
 
 	private
