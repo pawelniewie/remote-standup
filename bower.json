@@ -3,6 +3,8 @@
   "dependencies": {
     "angular-underscore": "*",
     "angular-filters": "*",
-    "underscore": "*"
+    "underscore": "*",
+    "moment": "*",
+    "moment-timezone": "*"
   }
 }

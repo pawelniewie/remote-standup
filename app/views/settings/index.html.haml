@@ -35,31 +35,43 @@
 				Settings
 			%small Couple of things to make it work!
 
-		%p You need to provide us a couple of details.
-
-		%p Click Submit to save them and send a first reminder (just to try it out).
+		%p When you're done click Submit to save them and send a first reminder to yourself (just to try it out).
 
 		%p Your response will be automatically forwarded to your peers (if you configure any) or saved on our servers so you can easily go back to it.
 
-		%form{role: "form", :id => 'settings', 'ng-app' => 'remotestandup.settings', 'ng-controller' => 'SettingsCtrl'}
+		%form{role: "form", :name => 'settings', 'ng-app' => 'remotestandup.settings', 'ng-controller' => 'SettingsCtrl', 'ng-cloak' => ''}
 			.form-group
 				%label{for: "timezone"} What's your timezone?
-				%input#timezone.form-control{placeholder: "Enter your timezone", type: "email", 'ng-value' => 'timezone'}/
+				%select#timezone.form-control{"ng-model" => "timezone", "ng-options" => "z for z in timezones", required: ""}
+
 			.form-group
 				%label{for: "time"} When to send you a reminder?
 				%div{"ng-model" => "reminder_at"}
 					%timepicker#time{"hour-step" => "1", "minute-step" => "1", "show-meridian" => "false", style: "inline-block"}
+
 			.form-group
 				%label{for: "days1"} What days do you work on?
 				.radio
 					%label
-						%input#days1{type: "radio", value: "1-5"}/
+						%input#days1{type: "radio", 'ng-model' => 'remind_on', value: "1-5"}/
 						From Monday to Friday
 				.radio
 					%label
-						%input#days2{type: "radio", value: "7"}/
+						%input#days2{type: "radio", 'ng-model' => 'remind_on', value: "7"}/
 						Every day
+
 			.form-group
 				%label{for: "member"} Who to send this to?
-				%input#member.form-control{placeholder: "Enter email", type: "email", 'ng-value' => 'email'}/
+				%input#member.form-control{placeholder: "Fill in and press Enter to add a recipient", type: "email", :name => 'member','ng-model' => 'member', 'ng-keyup' => 'memberKeyUp($event)'}/
+				%small.error{"ng-show" => "settings.member.$error.email"} That is not a valid email address
+
+			.form-group
+				%label{for: "members"} Recipients
+				#members
+					%p.form-control-static{'ng-repeat' => 'member in members', 'ng-show' => 'members.length > 0'}
+						{{member}}
+						%a{'ng-click' => 'removeMember(member)', :title => 'Remove'}
+							%span.glyphicon.glyphicon-remove-circle
+					%p.form-control-static{'ng-show' => '!members || members.length == 0'} You didn't set any team members yet.
+
 			%button.btn.btn-primary{type: "submit"} Submit
