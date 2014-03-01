@@ -1,8 +1,8 @@
-class User < ActiveRecord::Base
+class Note < ActiveRecord::Base
 
 	scope :first, -> { order("created_at").first }
   scope :last, -> { order("created_at DESC").first }
 
-  has_many :notes, dependent: :destroy
+  belongs_to :user
 
 end

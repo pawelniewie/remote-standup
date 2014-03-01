@@ -26,6 +26,7 @@ class ApplicationController < ActionController::Base
 
   def require_user
     if current_user.nil?
+      session.delete :user_id
       redirect_to(:controller => 'login') and return false
     end
   end

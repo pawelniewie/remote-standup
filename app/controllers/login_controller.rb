@@ -7,13 +7,13 @@ class LoginController < ApplicationController
 	end
 
 	def logout
-		session[:user_id] = nil
+		session.delete :user_id
 		flash[:notice] = 'You have been logged out'
 		redirect_to :controller => 'welcome'
 	end
 
 	def google
-	  session[:user_id] = nil
+	  session.delete :user_id
 	  session[:state] = Digest::MD5.hexdigest(rand().to_s)
 
 	  redirect_to @google.auth_code.authorize_url(:redirect_uri => url_for(:action => 'google_callback'),

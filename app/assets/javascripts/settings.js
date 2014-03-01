@@ -49,11 +49,15 @@ angular.module('remotestandup.settings', [
 	$scope.loading = false;
 	$scope.timezones = _.map(moment.tz.zones(), function(tz) { return tz.displayName; }).sort();
 
-	$scope.settings = {};
-	$scope.settings.timezone = $().get_timezone();
-	$scope.settings.remind_on = '1-5';
+	$scope.settings = settings || {};
 
-	angular.extend($scope.settings, settings);
+	if (!$scope.settings.timezone || $scope.settings.timezone == '') {
+		$scope.settings.timezone = $().get_timezone();
+	}
+
+	if (!$scope.settings.remind_on) {
+		$scope.settings.remind_on = '1-5';
+	}
 
 	$scope.memberKeyDown = function($event) {
 		if ($event.keyCode == 13) {
