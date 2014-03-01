@@ -41,6 +41,7 @@ gem 'rails_stdout_logging'
 gem 'gibbon'
 gem 'intercom-rails', '~> 0.2.24'
 gem 'mandrill-api', :require => "mandrill"
+gem 'mandrill-rails'
 
 # Views
 gem 'haml-rails'
