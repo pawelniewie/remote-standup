@@ -6,7 +6,7 @@ class IncomingController < ApplicationController
 		matches = /(?<uuid>[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})/.match(event_payload['msg']['headers']['To'])
 		if matches
 			begin
-				User.find(matches.uuid).notes.create(
+				User.find(matches['uuid']).notes.create(
 					from_email: event_payload['msg']['from_email'],
 					from_name: event_payload['msg']['from_name'],
 					headers: event_payload['msg']['headers'],
