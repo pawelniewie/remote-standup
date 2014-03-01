@@ -3,7 +3,7 @@ class IncomingController < ApplicationController
 	# authenticate_with_mandrill_keys! 'MANDRILL_WEBHOOKS_KEY'
 
 	def handle_inbound(event_payload)
-		matches = /(?<uuid>[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})/.match(event_payload['msg']['from_email'])
+		matches = /(?<uuid>[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})/.match(event_payload['msg']['headers']['To'])
 		if matches
 			begin
 				User.find(matches.uuid).notes.create(
@@ -19,7 +19,7 @@ class IncomingController < ApplicationController
 	    	logger.warn("No such recipient #{matches.uuid}")
 	    end
 		else
-			logger.warn("Unrecognized recipient #{event_payload['msg']['from_email']}")
+			logger.warn("Unrecognized recipient #{event_payload['msg']['headers']['To']}")
 		end
   end
 end
