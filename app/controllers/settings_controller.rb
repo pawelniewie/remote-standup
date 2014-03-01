@@ -3,6 +3,10 @@ class SettingsController < ApplicationController
 
 	def update
 		current_user.update!(params.require(:settings).permit(:timezone, :reminder_at_h, :reminder_at_m, :remind_on, :members => []))
+		respond_to do |format|
+			format.html { redirect_to :action => 'show', notice: 'Settings were saved.' }
+			format.json { head :no_content }
+		end
 	end
 
 end

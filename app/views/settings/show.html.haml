@@ -9,7 +9,7 @@
 
 		%p Your response will be automatically forwarded to your peers (if you configure any) or saved on our servers so you can easily go back to it.
 
-		%form{role: "form", :name => 'settingsForm', 'ng-app' => 'remotestandup.settings', 'ng-controller' => 'SettingsCtrl', 'ng-cloak' => '', 'ng-submit' => 'saveSettings()'}
+		%form{role: "form", :name => 'settingsForm', 'ng-app' => 'remotestandup.settings', 'ng-controller' => 'SettingsCtrl', 'ng-cloak' => '', 'ng-submit' => 'saveSettings()', 'data-settings' => render(template: 'settings/show', formats: :json)}
 			.form-group
 				%label{for: "timezone"} What's your timezone?
 				%select#timezone.form-control{'ng-model' => 'settings.timezone', "ng-options" => "z for z in timezones", required: ""}
@@ -49,3 +49,5 @@
 				Submit
 				%i.fa.fa-spinner.fa-spin{:'ng-show' => 'loading'}
 			%small{'ng-show' => 'settingsForm.$invalid'} There are errors in the form
+			%small.alert.alert-success.save-results{'ng-show' => 'saved'}
+				Settings were saved!

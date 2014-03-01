@@ -1,6 +1,6 @@
 //= require underscore/underscore.js
 //= require angular
-//= require angular-resource
+//= require angular-animate
 //= require angular-ui-bootstrap-tpls
 //= require angular-underscore/angular-underscore.js
 //= require angular-filters/dist/angular-filters.min.js
@@ -10,6 +10,7 @@
 //= require moment-timezone/moment-timezone
 //= require ./moment-timezone-data.js
 angular.module('remotestandup.settings', [
+	'ngAnimate',
 	'angular-underscore',
 	'ui.bootstrap'
 ])
@@ -41,14 +42,18 @@ angular.module('remotestandup.settings', [
         }
     };
 })
-.controller('SettingsCtrl', ['$scope', '$http', function($scope, $http) {
+.factory('settings', function() {
+	return angular.element('form[name="settingsForm"]').data('settings');
+})
+.controller('SettingsCtrl', ['$scope', '$http', 'settings', function($scope, $http, settings) {
 	$scope.loading = false;
 	$scope.timezones = _.map(moment.tz.zones(), function(tz) { return tz.displayName; }).sort();
 
 	$scope.settings = {};
-	$scope.settings.members = [ 'test@test.pl' ];
 	$scope.settings.timezone = $().get_timezone();
 	$scope.settings.remind_on = '1-5';
+
+	angular.extend($scope.settings, settings);
 
 	$scope.memberKeyDown = function($event) {
 		if ($event.keyCode == 13) {
@@ -85,9 +90,14 @@ angular.module('remotestandup.settings', [
 			}
 		}
 
-		$http.put('/settings', {settings: settings})
+		$http.put('/settings.json', {settings: settings})
 			.then(function(data) {
-				$scope.settings = data;
+				$scope.saved = true;
+				setTimeout(function() {
+					$scope.$apply(function() {
+						$scope.saved = false;
+					})
+				}, 1500);
 			})
 			.finally(function() {
 				$scope.loading = false;
