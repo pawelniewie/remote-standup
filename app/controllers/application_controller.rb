@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   after_filter :set_csrf_cookie_for_ng
+  around_filter :user_time_zone, :if => :current_user
 
   private
 
@@ -39,6 +40,10 @@ class ApplicationController < ActionController::Base
         nil
       end
     end
+  end
+
+  def user_time_zone(&block)
+    Time.use_zone(current_user.timezone, &block)
   end
 
 end

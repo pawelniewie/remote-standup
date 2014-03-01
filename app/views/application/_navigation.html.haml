@@ -31,13 +31,15 @@
               %i.fa.fa-home
               %span.hidden Home
           -if logged_in?
-            =link_to settings_path do
+            =link_to notes_path do
               %i.fa.fa-home
               %span.hidden Home
         -unless logged_in?
           %li{:class => ('active' if current_page? pricing_path)}
             %a.menu-item{href: pricing_path} Pricing
         -if logged_in?
+          %li{:class => ('active' if current_page? notes_path)}
+            %a.menu-item{href: notes_path} Notes
           %li{:class => ('active' if current_page? settings_path)}
             %a.menu-item{href: settings_path} Settings
         %li.dropdown{:class => ('active' if current_page? about_path or current_page? team_path or current_page? contact_path)}

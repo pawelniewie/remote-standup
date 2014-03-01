@@ -26,6 +26,7 @@ Public::Application.routes.draw do
   put 'settings' => 'settings#update'
 
   resource :incoming, :controller => 'incoming', :only => [:show,:create]
+  resources :notes
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

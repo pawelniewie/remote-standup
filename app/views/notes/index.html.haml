@@ -1,0 +1,13 @@
+#content
+	.container
+		%h2.title-divider
+			%span
+				Notes
+			%small List of your daily entries
+
+		- @notes.each do |note|
+			%h5
+				Received at
+				=note.created_at
+			%blockquote
+				%pre=note.note
