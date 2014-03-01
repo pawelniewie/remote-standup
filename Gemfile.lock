@@ -46,6 +46,11 @@ GEM
       execjs
     coffee-script-source (1.7.0)
     commonjs (0.2.7)
+    delayed_job (4.0.0)
+      activesupport (>= 3.0, < 4.1)
+    delayed_job_active_record (4.0.0)
+      activerecord (>= 3.0, < 4.1)
+      delayed_job (>= 3.0, < 4.1)
     detect_timezone_rails (0.0.5)
       railties (>= 3.1)
     diff-lcs (1.2.5)
@@ -100,6 +105,10 @@ GEM
       json (>= 1.7.7, < 2.0)
     mandrill-rails (1.0.1)
       activesupport (>= 3.0.3)
+    mandrill_mailer (0.4.3)
+      actionpack
+      activesupport
+      mandrill-api (~> 1.0.9)
     mime-types (1.25.1)
     mini_portile (0.5.2)
     minitest (4.7.5)
@@ -205,6 +214,7 @@ DEPENDENCIES
   bootstrap-sass (~> 3.1.0.0)
   capybara
   coffee-rails (~> 4.0.0)
+  delayed_job_active_record
   detect_timezone_rails
   figaro
   font-awesome-rails
@@ -216,6 +226,7 @@ DEPENDENCIES
   less-rails
   mandrill-api
   mandrill-rails
+  mandrill_mailer
   minitest
   newrelic_rpm
   oauth2
