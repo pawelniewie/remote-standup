@@ -1,4 +1,3 @@
-<% environment.context_class.instance_eval { include Rails.application.routes.url_helpers } %>
 angular.module('teamstatus.public.newsletter', ['ui.bootstrap'])
 	.constant('path', "<%= newsletter_path %>")
 	.controller('NewsletterCtrl', ['$scope', '$http', 'path', function($scope, $http, path) {
@@ -41,27 +40,6 @@ angular.module('teamstatus.public.contact', ['ui.bootstrap'])
 angular.bootstrap(angular.element('.block.newsletter'), ['teamstatus.public.newsletter']);
 
 angular.module('teamstatus.public.login', [])
-	.constant('downloadPath', "<%= download_path %>")
-	.controller('SignUpCtrl', [function () {}])
-	.controller('DownloadCtrl', ['$scope', '$http', 'downloadPath', function ($scope, $http, downloadPath) {
-		$scope.loading = false;
-		$scope.succeeded = false;
-
-		$scope.startDownload = function() {
-			$scope.loading = true;
-			$http.post(downloadPath + ".json", { email: this.email, first_name: this.first_name, last_name: this.last_name }).success(function(download) {
-				$scope.loading = false;
-				$scope.succeeded = true;
-				$scope.download = download;
-
-				$.fileDownload(downloadPath).done(function() {
-					$('#download-modal').modal('hide');
-				});
-			}).error(function() {
-				$scope.loading = false;
-				$scope.succeeded = false;
-			});
-		};
-	}]);
+	.controller('SignUpCtrl', [function () {}]);
 
 angular.bootstrap(angular.element('.hidden-elements.jpanel-menu-exclude'), ['teamstatus.public.login']);
