@@ -11,3 +11,10 @@ test:
   username: remotestandup
   password: remotestandup
   host: localhost
+
+production:
+  adapter: postgresql
+  database: rs-pro
+  username: remotestandup
+  password: remotestandup
+  host: localhost
