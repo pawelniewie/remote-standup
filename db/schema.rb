@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(version: 20140301113135) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
+  enable_extension "hstore"
 
   create_table "delayed_jobs", force: true do |t|
     t.integer  "priority",   default: 0, null: false
@@ -36,7 +37,7 @@ ActiveRecord::Schema.define(version: 20140301113135) do
   create_table "notes", force: true do |t|
     t.text     "from_email",   default: "", null: false
     t.text     "from_name",    default: "", null: false
-    t.text     "headers",      default: [], null: false, array: true
+    t.hstore   "headers",      default: [], null: false, array: true
     t.text     "raw_payload",  default: "", null: false
     t.text     "message_text", default: "", null: false
     t.text     "message_html", default: "", null: false
@@ -58,7 +59,7 @@ ActiveRecord::Schema.define(version: 20140301113135) do
     t.boolean  "male"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.text     "timezone",                       default: "GMT", null: false
+    t.text     "timezone",                       default: "",    null: false
     t.integer  "reminder_at_h",        limit: 2, default: 17,    null: false
     t.integer  "reminder_at_m",        limit: 2, default: 0,     null: false
     t.text     "remind_on",                      default: "1-5", null: false
