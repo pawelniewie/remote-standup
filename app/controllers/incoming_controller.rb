@@ -16,10 +16,10 @@ class IncomingController < ApplicationController
 	      	note: event_payload['msg']['text']
 	      )
 	    rescue ActiveRecord::RecordNotFound
-	    	logger.warning("No such recipient #{matches.uuid}")
+	    	logger.warn("No such recipient #{matches.uuid}")
 	    end
 		else
-			logger.warning("Unrecognized recipient #{event_payload['msg']['from_email']}")
+			logger.warn("Unrecognized recipient #{event_payload['msg']['from_email']}")
 		end
   end
 end
