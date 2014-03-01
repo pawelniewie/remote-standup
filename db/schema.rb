@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140301113135) do
+ActiveRecord::Schema.define(version: 20140301141217) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,7 +37,6 @@ ActiveRecord::Schema.define(version: 20140301113135) do
   create_table "notes", force: true do |t|
     t.text     "from_email",   default: "", null: false
     t.text     "from_name",    default: "", null: false
-    t.hstore   "headers",      default: [], null: false, array: true
     t.text     "raw_payload",  default: "", null: false
     t.text     "message_text", default: "", null: false
     t.text     "message_html", default: "", null: false
@@ -45,6 +44,7 @@ ActiveRecord::Schema.define(version: 20140301113135) do
     t.uuid     "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.hstore   "headers",      default: {}, null: false
   end
 
   add_index "notes", ["user_id"], name: "index_notes_on_user_id", using: :btree
