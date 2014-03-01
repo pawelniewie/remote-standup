@@ -4,8 +4,9 @@ class SettingsController < ApplicationController
 	def update
 		current_user.update!(params.require(:settings).permit(:timezone, :reminder_at_h, :reminder_at_m, :remind_on, :members => []))
 
-		#if first_time?
-		Delayed::Job.enqueue( SendReminderEmailJob.new(id: current_user.id) )
+		if current_user.sent_reminder_at.nil?
+			Delayed::Job.enqueue( SendReminderEmailJob.new(id: current_user.id) )
+		end
 
 		respond_to do |format|
 			format.html { redirect_to :action => 'show', notice: 'Settings were saved.' }

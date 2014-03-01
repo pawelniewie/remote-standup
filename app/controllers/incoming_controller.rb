@@ -6,7 +6,7 @@ class IncomingController < ApplicationController
 		matches = /(?<uuid>[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})/.match(event_payload['msg']['headers']['To'])
 		if matches
 			begin
-				User.find(matches['uuid']).notes.create(
+				note = User.find(matches['uuid']).notes.create(
 					from_email: event_payload['msg']['from_email'],
 					from_name: event_payload['msg']['from_name'],
 					headers: event_payload['msg']['headers'],
@@ -15,6 +15,8 @@ class IncomingController < ApplicationController
 					message_html: event_payload['msg']['html'],
 	      	note: event_payload['msg']['text']
 	      )
+
+	      Delayed::Job.enqueue( ShareNoteEmailJob.new(id: note.id) )
 	    rescue ActiveRecord::RecordNotFound
 	    	logger.warn("No such recipient #{matches.uuid}")
 	    end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140301141217) do
+ActiveRecord::Schema.define(version: 20140301151100) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,6 +64,7 @@ ActiveRecord::Schema.define(version: 20140301141217) do
     t.integer  "reminder_at_m",        limit: 2, default: 0,     null: false
     t.text     "remind_on",                      default: "1-5", null: false
     t.text     "members",                        default: [],    null: false, array: true
+    t.datetime "sent_reminder_at"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
