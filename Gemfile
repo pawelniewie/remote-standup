@@ -76,3 +76,6 @@ end
 
 # Use unicorn as the app server
 gem 'unicorn'
+gem 'capistrano'
+gem 'capistrano-rails'
+gem 'capistrano-bundler'
