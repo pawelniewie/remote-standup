@@ -44,6 +44,7 @@ gem 'mandrill-api', :require => "mandrill"
 gem 'mandrill-rails'
 gem 'mandrill_mailer'
 gem 'delayed_job_active_record'
+gem 'daemons'
 
 # Views
 gem 'haml-rails'
