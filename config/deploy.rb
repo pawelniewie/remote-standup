@@ -14,6 +14,7 @@ set :deploy_to, '/var/www/remotestandup.com'
 set :pty, true
 
 set :bundle_binstubs, -> { shared_path.join('stubs') }
+set :figaro_path, -> { fetch(:deploy_to) + '/configuration' }
 
 # Default value for :linked_files is []
 # set :linked_files, %w{config/database.yml}
@@ -51,21 +52,4 @@ namespace :deploy do
 
 end
 
-namespace :figaro do
-  desc "SCP transfer figaro configuration to the shared folder"
-  task :setup do
-    on roles(:app) do
-      upload! "config/application.yml", "#{shared_path}/application.yml", via: :scp
-    end
-  end
-
-  desc "Symlink application.yml to the release path"
-  task :symlink do
-    on roles(:app) do
-      execute "ln -sf #{shared_path}/application.yml #{release_path}/config/application.yml"
-    end
-  end
-end
-
-after "deploy:started", "figaro:setup"
 before "bundler:install", "figaro:symlink"
