@@ -13,6 +13,8 @@ set :deploy_to, '/var/www/remotestandup.com'
 # Default value for :pty is false
 set :pty, true
 
+set :bundle_binstubs, -> { shared_path.join('stubs') }
+
 # Default value for :linked_files is []
 # set :linked_files, %w{config/database.yml}
 
@@ -23,7 +25,7 @@ set :default_env, {
   path: '/usr/local/rbenv/shims:/usr/local/rbenv/bin:$PATH'
 }
 
-after 'deploy:publishing', 'deploy:restart'
+after 'deploy:publishing', 'delayed_job:restart'
 
 namespace :deploy do
 
@@ -33,7 +35,6 @@ namespace :deploy do
       # Your restart mechanism here, for example:
       # execute :touch, release_path.join('tmp/restart.txt')
       execute :sv, 2, "/home/deployer/service/remotestandup"
-      invoke 'delayed_job:restart'
     end
   end
 
