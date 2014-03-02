@@ -16,7 +16,7 @@ timeout 30
 working_directory '/var/www/remotestandup.com/current'
 
 # Listen on a Unix data socket
-pid '/var/www/remotestandup.com/shared/pids/unicorn.pid'
+pid '/var/www/remotestandup.com/shared/tmp/pids/unicorn.pid'
 listen "/var/www/remotestandup.com/tmp/sockets/remotestandup.com.sock", :backlog => 2048
 
 stderr_path '/var/www/remotestandup.com/shared/log/unicorn.log'
@@ -38,7 +38,7 @@ before_fork do |server, worker|
   #
   # Using this method we get 0 downtime deploys.
 
-  old_pid = '/var/www/remotestandup.com/shared/pids/unicorn.pid.oldbin'
+  old_pid = '/var/www/remotestandup.com/shared/tmp/pids/unicorn.pid.oldbin'
 
   if File.exists?(old_pid) && server.pid != old_pid
     begin

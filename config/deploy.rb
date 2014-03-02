@@ -7,9 +7,6 @@ set :git_shallow_clone, 1
 
 set :ssh_options, { :forward_agent => true }
 
-# Default branch is :master
-# ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
-
 # Default deploy_to directory is /var/www/my_app
 set :deploy_to, '/var/www/remotestandup.com'
 
@@ -20,20 +17,15 @@ set :pty, true
 # set :linked_files, %w{config/database.yml}
 
 # Default value for linked_dirs is []
-# set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
+set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
 
 set :default_env, {
   path: '/usr/local/rbenv/shims:/usr/local/rbenv/bin:$PATH'
 }
 
-# after 'deploy:update_code', :upload_env_vars
-
 # after 'deploy:setup' do
 #   sudo "chown -R #{user} #{deploy_to} && chmod -R g+s #{deploy_to}"
 # end
-
-# Default value for keep_releases is 5
-# set :keep_releases, 5
 
 # require 'delayed/recipes'
 # set :delayed_job_command, "bin/delayed_job"
@@ -48,7 +40,7 @@ namespace :deploy do
     on roles(:app), in: :sequence, wait: 5 do
       # Your restart mechanism here, for example:
       # execute :touch, release_path.join('tmp/restart.txt')
-      execute :sv, 2, "/home/#{user}/service/#{application}"
+      execute :sv, 2, "/home/deployer/service/remotestandup"
     end
   end
 
@@ -64,3 +56,22 @@ namespace :deploy do
   end
 
 end
+
+namespace :figaro do
+  desc "SCP transfer figaro configuration to the shared folder"
+  task :setup do
+    on roles(:app) do
+      upload! "config/application.yml", "#{shared_path}/application.yml", via: :scp
+    end
+  end
+
+  desc "Symlink application.yml to the release path"
+  task :symlink do
+    on roles(:app) do
+      execute "ln -sf #{shared_path}/application.yml #{release_path}/config/application.yml"
+    end
+  end
+end
+
+after "deploy:started", "figaro:setup"
+before "bundler:install", "figaro:symlink"
