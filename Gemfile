@@ -69,15 +69,16 @@ group :production do
 	gem 'rails_12factor'
 end
 
-group :test do
+group :development, :test do
 	gem 'minitest'
 	gem 'capybara'
 	gem 'rspec-rails'
+
+	gem 'capistrano'
+	gem 'capistrano-rails'
+	gem 'capistrano-bundler'
+	gem 'capistrano-bower'
 end
 
 # Use unicorn as the app server
 gem 'unicorn'
-gem 'capistrano'
-gem 'capistrano-rails'
-gem 'capistrano-bundler'
-gem 'capistrano-bower'

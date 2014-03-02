@@ -23,6 +23,8 @@ set :default_env, {
   path: '/usr/local/rbenv/shims:/usr/local/rbenv/bin:$PATH'
 }
 
+after 'deploy:publishing', 'deploy:restart'
+
 namespace :deploy do
 
   desc 'Restart application'
