@@ -14,6 +14,10 @@ gem 'devise_invitable'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-bitbucket'
 gem 'omniauth-github'
+gem 'omniauth-facebook'
+gem 'omniauth-linkedin'
+gem 'omniauth-twitter'
+gem 'koala'
 
 # Database
 gem 'pg'

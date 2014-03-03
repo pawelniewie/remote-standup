@@ -1,6 +1,8 @@
 Public::Application.routes.draw do
 
-  devise_for :users
+  devise_for :users, :controllers => {
+    :omniauth_callbacks => "users/omniauth_callbacks"
+  }
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -18,11 +20,6 @@ Public::Application.routes.draw do
   get "terms" => 'welcome#terms'
   get "privacy" => 'welcome#privacy'
   post "newsletter" => 'welcome#newsletter'
-
-  get 'login' => 'login#index'
-  get 'login/google' => 'login#google'
-  get 'login/google_callback' => 'login#google_callback'
-  get 'logout' => 'login#logout'
 
   get 'settings' => 'settings#show'
   put 'settings' => 'settings#update'
