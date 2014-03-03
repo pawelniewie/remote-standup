@@ -8,7 +8,11 @@ gem 'rails', '~> 4.0.2'
 gem 'rack-google-analytics'
 
 # Authentication
-gem 'oauth2'
+gem 'devise'
+gem 'devise-encryptable'
+gem 'omniauth-google-oauth2'
+gem 'omniauth-bitbucket'
+gem 'omniauth-github'
 
 # Database
 gem 'pg'
