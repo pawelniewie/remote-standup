@@ -25,23 +25,6 @@ class ApplicationController < ActionController::Base
     render :nothing => true, :status => :accepted
   end
 
-  def require_user
-    if current_user.nil?
-      session.delete :user_id
-      redirect_to(:controller => 'login') and return false
-    end
-  end
-
-  def current_user
-    if session[:user_id]
-      begin
-        @current_user ||= User.find(session[:user_id])
-      rescue
-        nil
-      end
-    end
-  end
-
   def user_time_zone(&block)
     Time.use_zone(current_user.timezone, &block)
   end

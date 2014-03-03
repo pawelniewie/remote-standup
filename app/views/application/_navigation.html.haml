@@ -15,29 +15,29 @@
       %span.bar
     / user menu
     .btn-group.user-menu.pull-right
-      - unless logged_in?
+      - unless user_signed_in?
         %a.btn.btn-primary.signup{"data-toggle" => "modal", href: "#signup-modal"} Sign Up
         / %a.btn.btn-primary.dropdown-toggle.login{"data-toggle" => "modal", href: "#login-modal"} Login
         %a.btn.btn-primary.dropdown-toggle.login{href: url_for(:controller => 'login', :action => 'google')} Log in
-      - if logged_in?
+      - if user_signed_in?
         %a.btn.btn-primary.dropdown-toggle.login{href: url_for(:controller => 'login', :action => 'logout')} Log out
     / everything within this div is collapsed on mobile
     .navbar-collapse.collapse
       / main navigation
       %ul.nav.navbar-nav
         %li.home-link
-          -unless logged_in?
+          -unless user_signed_in?
             =link_to root_path do
               %i.fa.fa-home
               %span.hidden Home
-          -if logged_in?
+          -if user_signed_in?
             =link_to notes_path do
               %i.fa.fa-home
               %span.hidden Home
-        -unless logged_in?
+        -unless user_signed_in?
           %li{:class => ('active' if current_page? pricing_path)}
             %a.menu-item{href: pricing_path} Pricing
-        -if logged_in?
+        -if user_signed_in?
           %li{:class => ('active' if current_page? notes_path)}
             %a.menu-item{href: notes_path} Notes
           %li{:class => ('active' if current_page? settings_path)}

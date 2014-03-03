@@ -45,7 +45,7 @@
 
 		!= yield
 
-		-unless logged_in?
+		-unless user_signed_in?
 			= render :partial => 'ending_wrapper'
 
 		!=javascript_include_tag 'application'
