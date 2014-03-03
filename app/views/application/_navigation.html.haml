@@ -18,9 +18,9 @@
       - unless user_signed_in?
         %a.btn.btn-primary.signup{"data-toggle" => "modal", href: "#signup-modal"} Sign Up
         / %a.btn.btn-primary.dropdown-toggle.login{"data-toggle" => "modal", href: "#login-modal"} Login
-        %a.btn.btn-primary.dropdown-toggle.login{href: url_for(:controller => 'login', :action => 'google')} Log in
+        %a.btn.btn-primary.dropdown-toggle.login{href: url_for(new_user_session_path)} Log in
       - if user_signed_in?
-        %a.btn.btn-primary.dropdown-toggle.login{href: url_for(:controller => 'login', :action => 'logout')} Log out
+        %a.btn.btn-primary.dropdown-toggle.login{href: url_for(destroy_user_session_path, :method => :delete)} Log out
     / everything within this div is collapsed on mobile
     .navbar-collapse.collapse
       / main navigation
