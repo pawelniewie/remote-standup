@@ -7,7 +7,7 @@
     %small Sign up in 20 seconds, upgrade, downgrade or cancel any time.
   / Stack 1
   .row.pricing-stack
-    .col-md-3.col-md-offset-1
+    .col-md-3.col-md-offset-3
       .well
         %h3.title Personal
         %p.price
@@ -22,28 +22,14 @@
     .col-md-3
       .well.active
         %h3.title
-          %span.em Team
+          %span.em Business
         %p.price
           %span.currency $
           %span.digits
-            39
-          %span.term /MONTH
+            5
+          %span.term /USER MONTH
         %ul.unstyled.points
-          %li Up to 10 people
-          %li Unlimited storage
-          %li Email support
-    .col-md-3
-      .well.active
-        %h3.title
-          %span.em Company
-          %span.fancy
-        %p.price
-          %span.currency $
-          %span.digits
-            129
-          %span.term /MONTH
-        %ul.unstyled.points
-          %li Up to 50 people
+          %li Unlimited users
           %li Unlimited storage
           %li Email support
 
@@ -56,5 +42,5 @@
           = succeed ":" do
             %span.de-em for 30 days
       %p.inline-el.pad-left.muted
-        %a.btn.btn-primary{"data-toggle" => "modal", href: "#signup-modal"} Start Today! No credit card required
+        %a.btn.btn-primary{href: new_user_registration_path} Start Today! No credit card required
         %p EU customers will be charged VAT at 23%
