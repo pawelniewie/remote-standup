@@ -10,6 +10,7 @@ gem 'rack-google-analytics'
 # Authentication
 gem 'devise'
 gem 'devise-encryptable'
+gem 'devise_invitable'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-bitbucket'
 gem 'omniauth-github'
@@ -77,6 +78,7 @@ group :development, :test do
 	gem 'minitest'
 	gem 'capybara'
 	gem 'rspec-rails'
+	gem 'erb2haml'
 
 	gem 'capistrano'
 	gem 'capistrano-rails'

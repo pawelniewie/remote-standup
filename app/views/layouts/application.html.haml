@@ -43,7 +43,13 @@
 
 		= render :partial => 'flash'
 
-		!= yield
+		- if body_class == 'welcome-index'
+			!=yield
+		- else
+			#content
+				.container
+
+					!= yield
 
 		-unless user_signed_in?
 			= render :partial => 'ending_wrapper'
