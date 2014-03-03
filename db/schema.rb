@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140301141217) do
+ActiveRecord::Schema.define(version: 20140303051431) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,22 +50,40 @@ ActiveRecord::Schema.define(version: 20140301141217) do
   add_index "notes", ["user_id"], name: "index_notes_on_user_id", using: :btree
 
   create_table "users", id: :uuid, default: "uuid_generate_v4()", force: true do |t|
-    t.text     "email",                                          null: false
-    t.text     "full_name",                      default: "",    null: false
-    t.text     "calling_name",                   default: "",    null: false
-    t.text     "picture",                        default: "",    null: false
-    t.text     "google_token",                   default: "",    null: false
+    t.text     "email",                                            null: false
+    t.text     "full_name",                        default: "",    null: false
+    t.text     "calling_name",                     default: "",    null: false
+    t.text     "picture",                          default: "",    null: false
+    t.text     "google_token",                     default: "",    null: false
     t.datetime "google_token_expires"
     t.boolean  "male"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.text     "timezone",                       default: "",    null: false
-    t.integer  "reminder_at_h",        limit: 2, default: 17,    null: false
-    t.integer  "reminder_at_m",        limit: 2, default: 0,     null: false
-    t.text     "remind_on",                      default: "1-5", null: false
-    t.text     "members",                        default: [],    null: false, array: true
+    t.text     "timezone",                         default: "",    null: false
+    t.integer  "reminder_at_h",          limit: 2, default: 17,    null: false
+    t.integer  "reminder_at_m",          limit: 2, default: 0,     null: false
+    t.text     "remind_on",                        default: "1-5", null: false
+    t.text     "members",                          default: [],    null: false, array: true
+    t.datetime "sent_reminder_at"
+    t.text     "encrypted_password",               default: "",    null: false
+    t.text     "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",                    default: 0,     null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.text     "current_sign_in_ip"
+    t.text     "last_sign_in_ip"
+    t.text     "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.text     "unconfirmed_email"
+    t.text     "provider"
+    t.text     "uid"
   end
 
+  add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end
