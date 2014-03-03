@@ -22,9 +22,9 @@ class WelcomeController < ApplicationController
         :subject=> "Contact for TeamStatus.TV",
         :text=>"Contact from:\nName: #{params['name']}\nEmail: #{params['email']}\n\n#{params['message']}",
         :from_name=> "TeamStatus.TV",
-        :from_email=> "root@teamstatus.tv",
+        :from_email=> "root@remotestandup.com",
         :to=>[
-          {:email => "pawel@teamstatus.tv", :name => "Pawel Niewiadomski"}
+          {:email => "pawel@remotestandup.com", :name => "Pawel Niewiadomski"}
         ]
       }
       mandrill.messages.send message
@@ -52,9 +52,9 @@ class WelcomeController < ApplicationController
         :subject=> "Download for TeamStatus.TV",
         :text=>"Download from:\nFirst Name: #{params['first_name']}\nLast Name: #{params['last_name']}\nEmail: #{params['email']}\n",
         :from_name=> "TeamStatus.TV",
-        :from_email=> "root@teamstatus.tv",
+        :from_email=> "root@remotestandup.com",
         :to=>[
-          {:email => "pawel@teamstatus.tv", :name => "Pawel Niewiadomski"}
+          {:email => "pawel@remotestandup.com", :name => "Pawel Niewiadomski"}
         ]
       }
       mandrill.messages.send message
