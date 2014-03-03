@@ -13,17 +13,16 @@ preload_app true
 # Restart any workers that haven't responded in 30 seconds
 timeout 30
 
-working_directory '/var/www/remotestandup.com/current'
+if File.directory? ('/var/www/remotestandup.com')
+  working_directory '/var/www/remotestandup.com/current'
 
-# Listen on a Unix data socket
-pid '/var/www/remotestandup.com/shared/tmp/pids/unicorn.pid'
-listen "/var/www/remotestandup.com/tmp/sockets/remotestandup.com.sock", :backlog => 2048
+  # Listen on a Unix data socket
+  pid '/var/www/remotestandup.com/shared/tmp/pids/unicorn.pid'
+  listen "/var/www/remotestandup.com/tmp/sockets/remotestandup.com.sock", :backlog => 2048
 
-stderr_path '/var/www/remotestandup.com/shared/log/unicorn.log'
-stdout_path '/var/www/remotestandup.com/shared/log/unicorn.log'
-
-before_exec do |server|
-  ENV["BUNDLE_GEMFILE"] = "/var/www/remotestandup.com/current/Gemfile"
+  before_exec do |server|
+    ENV["BUNDLE_GEMFILE"] = "/var/www/remotestandup.com/current/Gemfile"
+  end
 end
 
 before_fork do |server, worker|
