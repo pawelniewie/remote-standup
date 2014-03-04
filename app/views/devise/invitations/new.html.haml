@@ -1,4 +1,6 @@
-%h2= t "devise.invitations.new.header"
+%h2.title-divider
+  %span= t "devise.invitations.new.header"
+  %small Invite new users to your team!
 = form_for resource, :as => resource_name, :url => invitation_path(resource_name), :html => {:method => :post, :role => 'form'} do |f|
   = devise_error_messages!
   - resource.class.invite_key_fields.each do |field|

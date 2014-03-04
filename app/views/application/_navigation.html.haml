@@ -25,22 +25,24 @@
       / main navigation
       %ul.nav.navbar-nav
         %li.home-link
-          -unless user_signed_in?
-            =link_to root_path do
-              %i.fa.fa-home
-              %span.hidden Home
-          -if user_signed_in?
-            =link_to notes_path do
-              %i.fa.fa-home
-              %span.hidden Home
+          =link_to user_signed_in? ? notes_path : root_path do
+            %i.fa.fa-home
+            %span.hidden Home
         -unless user_signed_in?
           %li{:class => ('active' if current_page? pricing_path)}
             %a.menu-item{href: pricing_path} Pricing
         -if user_signed_in?
           %li{:class => ('active' if current_page? notes_path)}
             %a.menu-item{href: notes_path} Notes
-          %li{:class => ('active' if current_page? settings_path)}
-            %a.menu-item{href: settings_path} Settings
+          %li.dropdown{:class => ('active' if current_page? settings_path or current_page? new_user_invitation_path)}
+            %a#account-drop.dropdown-toggle{"data-toggle" => "dropdown", href: about_path} Account +
+            %ul.dropdown-menu{"aria-labelledby" => "account-drop", role: "menu"}
+              %li{role: "presentation"}
+                %a.menu-item{href: settings_path} Settings
+              %li{role: "presentation"}
+                %a.menu-item{href: new_user_invitation_path} Invite users
+              %li{role: "presentation"}
+                %a.menu-item{href: edit_user_registration_path} Edit account
         %li.dropdown{:class => ('active' if current_page? about_path or current_page? team_path or current_page? contact_path)}
           %a#about-drop.dropdown-toggle{"data-toggle" => "dropdown", href: about_path} About +
           / Dropdown Menu

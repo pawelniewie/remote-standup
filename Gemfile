@@ -53,6 +53,7 @@ gem 'mandrill-api', :require => "mandrill"
 gem 'mandrill-rails'
 gem 'mandrill_mailer'
 gem 'sidekiq'
+gem 'sidetiq'
 
 # Views
 gem 'haml-rails'
