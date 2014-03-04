@@ -16,7 +16,7 @@ class IncomingController < ApplicationController
 	      	note: event_payload['msg']['text']
 	      )
 
-	      Delayed::Job.enqueue( ShareNoteEmailJob.new(id: note.id) )
+	      ShareNoteEmailWorker.perform_async(note.id)
 	    rescue ActiveRecord::RecordNotFound
 	    	logger.warn("No such recipient #{matches.uuid}")
 	    end

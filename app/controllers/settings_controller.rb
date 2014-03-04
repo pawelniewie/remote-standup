@@ -5,7 +5,7 @@ class SettingsController < ApplicationController
 		current_user.update!(params.require(:settings).permit(:timezone, :reminder_at_h, :reminder_at_m, :remind_on, :members => []))
 
 		if current_user.sent_reminder_at.nil?
-			Delayed::Job.enqueue( SendReminderEmailJob.new(id: current_user.id) )
+			SendReminderEmailWorker.perform_async(current_user.id)
 		end
 
 		respond_to do |format|

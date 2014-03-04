@@ -52,8 +52,7 @@ gem 'intercom-rails', '~> 0.2.24'
 gem 'mandrill-api', :require => "mandrill"
 gem 'mandrill-rails'
 gem 'mandrill_mailer'
-gem 'daemons'
-gem 'delayed_job_active_record'
+gem 'sidekiq'
 
 # Views
 gem 'haml-rails'
