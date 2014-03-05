@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
 
 	has_many :notes, dependent: :destroy
 	has_many :invitations, :class_name => self.to_s, :as => :invited_by
+	belongs_to :admin, :class_name => self.to_s
 
 	def self.new_with_session(params,session)
 		if session["devise.user_attributes"]

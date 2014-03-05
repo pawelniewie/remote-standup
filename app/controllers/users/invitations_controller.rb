@@ -1,10 +1,6 @@
 class Users::InvitationsController < Devise::InvitationsController
   def update
-    if this
-      redirect_to root_path
-    else
-      super
-    end
+    redirect_to settings_path
   end
 
   private
@@ -12,7 +8,7 @@ class Users::InvitationsController < Devise::InvitationsController
   def invite_resource
     # copy team id
     resource_class.invite!(invite_params, current_inviter) do |u|
-      # u.team_id = current_inviter.team_id if u.team_id.nil?
+      u.admin = current_inviter.admin.nil? ? current_inviter : current_inviter.admin
     end
   end
 
