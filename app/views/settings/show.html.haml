@@ -29,20 +29,6 @@
 				%input#days2{type: "radio", 'ng-model' => 'settings.remind_on', value: "7"}/
 				Every day
 
-	.form-group
-		%label{for: "member"} Who to send it to?
-		%input#member.form-control{placeholder: "Fill in and press Enter to add a recipient", type: "email", :name => 'member','ng-model' => 'member', 'ng-keydown' => 'memberKeyDown($event)'}/
-		%small.error{"ng-show" => "settingsForm.member.$error.email"} That is not a valid email address
-
-	.form-group
-		%label{for: "members"} Recipients
-		#members
-			%p.form-control-static{'ng-repeat' => 'member in settings.members', 'ng-show' => 'settings.members.length > 0'}
-				{{member}}
-				%a{'ng-click' => 'removeMember(member)', :title => 'Remove'}
-					%span.glyphicon.glyphicon-remove-circle
-			%p.form-control-static{'ng-show' => '!settings.members || settings.members.length == 0'} You didn't set any team members yet.
-
 	%button.btn.btn-primary{type: "button", 'ng-disabled' => 'loading || settingsForm.$invalid', 'ng-click' => 'saveSettings()'}
 		Submit
 		%i.fa.fa-spinner.fa-spin{:'ng-show' => 'loading'}

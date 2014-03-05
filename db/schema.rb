@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140305053645) do
+ActiveRecord::Schema.define(version: 20140305060109) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,7 +72,6 @@ ActiveRecord::Schema.define(version: 20140305053645) do
     t.integer  "reminder_at_h",          limit: 2, default: 17,    null: false
     t.integer  "reminder_at_m",          limit: 2, default: 0,     null: false
     t.text     "remind_on",                        default: "1-5", null: false
-    t.text     "members",                          default: [],    null: false, array: true
     t.datetime "sent_reminder_at"
     t.text     "encrypted_password",               default: ""
     t.text     "reset_password_token"

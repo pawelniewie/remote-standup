@@ -1,7 +1,4 @@
 class Users::InvitationsController < Devise::InvitationsController
-  def update
-    redirect_to settings_path
-  end
 
   private
 
@@ -12,7 +9,11 @@ class Users::InvitationsController < Devise::InvitationsController
     end
   end
 
-  def after_sign_in_path_for(user)
+  def after_accept_path_for(user)
+    settings_path
+  end
+
+  def after_invite_path_for(user)
     new_user_invitation_path
   end
 end

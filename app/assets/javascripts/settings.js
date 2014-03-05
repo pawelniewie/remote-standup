@@ -59,29 +59,6 @@ angular.module('remotestandup.settings', [
 		$scope.settings.remind_on = '1-5';
 	}
 
-	$scope.memberKeyDown = function($event) {
-		if ($event.keyCode == 13) {
-			$event.preventDefault();
-			$scope.addMember();
-		}
-	}
-
-	$scope.addMember = function() {
-		if ($scope.member) {
-			if ($scope.settings.members.indexOf($scope.member) == -1) {
-				$scope.settings.members.push($scope.member);
-			}
-			$scope.member = '';
-		}
-	}
-
-	$scope.removeMember = function(member) {
-		var idx = $scope.settings.members.indexOf(member);
-		if (idx > -1) {
-			$scope.settings.members.splice(idx, 1);
-		}
-	}
-
 	$scope.saveSettings = function() {
 		$scope.loading = true;
 		var settings = angular.copy($scope.settings);

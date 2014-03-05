@@ -15,6 +15,10 @@ class User < ActiveRecord::Base
 	has_many :invitations, :class_name => self.to_s, :as => :invited_by
 	belongs_to :admin, :class_name => self.to_s
 
+	def members
+		User.where(:admin => self.admin.nil? ? self.admin : self)
+	end
+
 	def self.new_with_session(params,session)
 		if session["devise.user_attributes"]
 			new(session["devise.user_attributes"],without_protection: true) do |user|
