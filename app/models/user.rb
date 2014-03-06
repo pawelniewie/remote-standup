@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
 	has_many :invitations, :class_name => self.to_s, :as => :invited_by
 	belongs_to :admin, :class_name => self.to_s
 
-	def find_members
+	def members
 		@members ||= User.where(:admin_id => admin.nil? ? id : admin.id).order('email')
 	end
 
