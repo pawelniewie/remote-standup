@@ -3,9 +3,15 @@
 		Notes
 	%small List of your daily entries
 
-- @notes.each do |note|
-	%h5
-		Received at
-		=note.created_at
-	%blockquote
-		%pre=note.note
+- unless @notes.empty?
+	- @notes.each do |note|
+		%h5
+			Received at
+			=note.created_at
+		%blockquote
+			%pre=note.note
+- else
+	%p
+		You don't have any notes yet. Please
+		=link_to 'set up', :controller => 'settings', :action => 'show'
+		your account and check your mailbox.
