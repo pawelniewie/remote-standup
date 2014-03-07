@@ -25,14 +25,19 @@ gem 'pg'
 # Smart ENV management
 gem 'figaro'
 
-# Use SCSS for stylesheets
+# Assets
 gem 'sass-rails', '~> 4.0.0'
-
-# Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
-
-# Use CoffeeScript for .js.coffee assets and views
 gem 'coffee-rails', '~> 4.0.0'
+
+gem 'asset_sync'
+gem 'unf'
+
+gem 'angularjs-rails'
+gem 'angular-ui-bootstrap-rails'
+gem 'less-rails'
+gem 'bootstrap-sass', '~> 3.1.0.0'
+gem 'font-awesome-rails'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 gem 'therubyracer', platforms: :ruby
@@ -57,11 +62,6 @@ gem 'sidetiq'
 
 # Views
 gem 'haml-rails'
-gem 'less-rails'
-gem 'bootstrap-sass', '~> 3.1.0.0'
-gem 'font-awesome-rails'
-gem 'angularjs-rails'
-gem 'angular-ui-bootstrap-rails'
 
 gem 'detect_timezone_rails'
 
