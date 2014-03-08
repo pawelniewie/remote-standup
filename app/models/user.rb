@@ -59,6 +59,8 @@ class User < ActiveRecord::Base
 	end
 
 	def send_todays_reminder
-		SendReminderEmailWorker.perform_async(current_user.id)
+		update_attribute :sent_reminder_at, Time.now
+    save
+		SendReminderEmailWorker.perform_async(id)
 	end
 end

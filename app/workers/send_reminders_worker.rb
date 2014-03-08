@@ -6,6 +6,7 @@ class SendRemindersWorker
 
   def perform(last_occurrence, current_occurrence)
   	UsersThatShouldGetReminderNowQuery.new.find_each do |user|
+  		logger.info "Queuing reminder for #{user.id} #{user.email}"
   		user.send_todays_reminder
   	end
   end

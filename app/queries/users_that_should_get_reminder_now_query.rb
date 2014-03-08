@@ -1,5 +1,5 @@
 class UsersThatShouldGetReminderNowQuery
-  def initialize(relation = User.scoped)
+  def initialize(relation = User.all)
     @relation = relation
   end
 
