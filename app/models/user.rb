@@ -57,4 +57,8 @@ class User < ActiveRecord::Base
 	def email_invited_by
    # ...
 	end
+
+	def send_todays_reminder
+		SendReminderEmailWorker.perform_async(current_user.id)
+	end
 end

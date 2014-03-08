@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140305060109) do
+ActiveRecord::Schema.define(version: 20140308155825) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -68,10 +68,10 @@ ActiveRecord::Schema.define(version: 20140305060109) do
     t.boolean  "male"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.text     "timezone",                         default: "",    null: false
+    t.text     "timezone",                         default: "GMT", null: false
     t.integer  "reminder_at_h",          limit: 2, default: 17,    null: false
     t.integer  "reminder_at_m",          limit: 2, default: 0,     null: false
-    t.text     "remind_on",                        default: "1-5", null: false
+    t.integer  "remind_on",              limit: 2,                 null: false, array: true
     t.datetime "sent_reminder_at"
     t.text     "encrypted_password",               default: ""
     t.text     "reset_password_token"
@@ -105,6 +105,7 @@ ActiveRecord::Schema.define(version: 20140305060109) do
   add_index "users", ["invitation_token"], name: "index_users_on_invitation_token", unique: true, using: :btree
   add_index "users", ["invitations_count"], name: "index_users_on_invitations_count", using: :btree
   add_index "users", ["invited_by_id"], name: "index_users_on_invited_by_id", using: :btree
+  add_index "users", ["remind_on"], name: "index_users_on_remind_on", using: :gin
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end

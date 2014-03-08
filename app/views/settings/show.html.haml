@@ -20,14 +20,10 @@
 
 	.form-group
 		%label{for: "days1"} What days do you work on?
-		.radio
-			%label
-				%input#days1{type: "radio", 'ng-model' => 'settings.remind_on', value: "1-5"}/
-				From Monday to Friday
-		.radio
-			%label
-				%input#days2{type: "radio", 'ng-model' => 'settings.remind_on', value: "7"}/
-				Every day
+		%div
+			%label.checkbox-inline{'ng-repeat' => 'day in weekdays'}
+				%input{type: "checkbox", 'ng-value' => "$index", 'ng-checked' => 'settings.remind_on.indexOf($index) > -1', 'ng-click' => 'toggleDay($index)'}/
+				{{day}}
 
 	%button.btn.btn-primary{type: "button", 'ng-disabled' => 'loading || settingsForm.$invalid', 'ng-click' => 'saveSettings()'}
 		Submit

@@ -48,6 +48,7 @@ angular.module('remotestandup.settings', [
 .controller('SettingsCtrl', ['$scope', '$http', 'settings', function($scope, $http, settings) {
 	$scope.loading = false;
 	$scope.timezones = _.map(moment.tz.zones(), function(tz) { return tz.displayName; }).sort();
+	$scope.weekdays = moment.weekdaysShort();
 
 	$scope.settings = settings || {};
 
@@ -56,8 +57,19 @@ angular.module('remotestandup.settings', [
 	}
 
 	if (!$scope.settings.remind_on) {
-		$scope.settings.remind_on = '1-5';
+		$scope.settings.remind_on = [1, 2, 3, 4, 5];
 	}
+
+	$scope.toggleDay = function(day) {
+		var idx = $scope.settings.remind_on.indexOf(day);
+    if (idx > -1) {
+    	// is currently selected
+      $scope.settings.remind_on.splice(idx, 1);
+    } else {
+    	// is newly selected
+      $scope.settings.remind_on.push(day);
+    }
+	};
 
 	$scope.saveSettings = function() {
 		$scope.loading = true;
