@@ -27,6 +27,8 @@ set :default_env, {
   path: '/usr/local/rbenv/shims:/usr/local/rbenv/bin:$PATH'
 }
 
+set(:sidekiq_cmd) { "#{bundle_cmd} exec sidekiq -e production" }
+
 namespace :deploy do
 
   desc 'Restart application'
