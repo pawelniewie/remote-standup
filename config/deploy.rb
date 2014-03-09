@@ -14,6 +14,7 @@ set :deploy_to, '/var/www/remotestandup.com'
 set :pty, true
 
 set :bundle_binstubs, -> { shared_path.join('stubs') }
+set :bundle_env_variables, { nokogiri_use_system_libraries: 1 }
 set :figaro_path, -> { fetch(:deploy_to) + '/configuration' }
 
 # Default value for :linked_files is []
