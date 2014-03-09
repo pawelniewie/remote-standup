@@ -350,7 +350,6 @@ DEPENDENCIES
   mandrill_mailer
   minitest
   newrelic_rpm
-  nokogiri (= 1.5.11)
   omniauth-bitbucket
   omniauth-facebook
   omniauth-github
