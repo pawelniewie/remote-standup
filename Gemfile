@@ -59,6 +59,7 @@ gem 'mandrill-rails'
 gem 'mandrill_mailer'
 gem 'sidekiq'
 gem 'sidetiq'
+gem 'email_reply_parser', github: 'raymccoy/email_reply_parser', branch: 'improved-sig-parsing'
 
 # Views
 gem 'haml-rails'

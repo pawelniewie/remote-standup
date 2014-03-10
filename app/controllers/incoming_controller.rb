@@ -1,4 +1,5 @@
 class IncomingController < ApplicationController
+	include NoteExtractor
 	include Mandrill::Rails::WebHookProcessor
 	# authenticate_with_mandrill_keys! 'MANDRILL_WEBHOOKS_KEY'
 
@@ -13,7 +14,7 @@ class IncomingController < ApplicationController
 					raw_payload: event_payload.to_s,
 					message_text: event_payload['msg']['text'],
 					message_html: event_payload['msg']['html'],
-	      	note: event_payload['msg']['text']
+	      	note: extract_note(event_payload['msg']['text'])
 	      )
 
 	      ShareNoteEmailWorker.perform_async(note.id)
@@ -24,4 +25,5 @@ class IncomingController < ApplicationController
 			logger.warn("Unrecognized recipient #{event_payload['msg']['headers']['To']}")
 		end
   end
+
 end
