@@ -8,6 +8,9 @@
 		%h5
 			Received at
 			=note.created_at
+			from
+			%a{href: "mailto:#{note.user.email}"}=note.user.calling_name.nil? ? note.user.email : note.user.calling_name
+
 		%blockquote
 			%pre=note.note
 - else
