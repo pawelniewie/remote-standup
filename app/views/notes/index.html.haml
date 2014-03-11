@@ -8,7 +8,7 @@
 		%h5
 			%a{href: "mailto:#{note.user.email}"}
 				=image_tag note.user.gravatar_url, :class => 'img-circle'
-				=note.user.calling_name.nil? ? note.user.email : note.user.calling_name
+				=note.user.calling_name.nil? or note.user.calling_name.empty? ? note.user.email : note.user.calling_name
 			wrote at
 			=note.created_at
 
