@@ -4,6 +4,13 @@ class User < ActiveRecord::Base
 	devise :invitable, :database_authenticatable, :registerable, :confirmable,
 				 :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 
+	include Gravtastic
+
+	gravtastic :email,
+	  :secure => true,
+	  :filetype => :png,
+	  :size => 15
+
 	validates_presence_of :email
 
 	has_many :authorizations

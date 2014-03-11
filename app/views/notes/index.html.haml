@@ -6,10 +6,11 @@
 - unless @notes.empty?
 	- @notes.each do |note|
 		%h5
-			Received at
+			%a{href: "mailto:#{note.user.email}"}
+				=image_tag note.user.gravatar_url, :class => 'img-circle'
+				=note.user.calling_name.nil? ? note.user.email : note.user.calling_name
+			wrote at
 			=note.created_at
-			from
-			%a{href: "mailto:#{note.user.email}"}=note.user.calling_name.nil? ? note.user.email : note.user.calling_name
 
 		%blockquote
 			%pre=note.note

@@ -18,6 +18,7 @@ gem 'omniauth-facebook'
 gem 'omniauth-linkedin'
 gem 'omniauth-twitter'
 gem 'koala'
+gem 'gravtastic'
 
 # Database
 gem 'pg'
