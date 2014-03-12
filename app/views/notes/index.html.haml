@@ -5,15 +5,16 @@
 
 - unless @notes.empty?
 	- @notes.each do |note|
-		%h5
-			%a{href: "mailto:#{note.user.email}"}
-				=image_tag note.user.gravatar_url, :class => 'img-circle'
-				=note.user.calling_name.nil? or note.user.calling_name.empty? ? note.user.email : note.user.calling_name
-			wrote at
-			=note.created_at
+		.note
+			%h5
+				%a{href: "mailto:#{note.user.email}"}
+					=image_tag note.user.gravatar_url, :class => 'img-circle'
+					=note.user.calling_name.nil? or note.user.calling_name.empty? ? note.user.email : note.user.calling_name
+				wrote at
+				=note.created_at
 
-		%blockquote
-			%pre=note.note
+			%div.content
+				=simple_format note.note
 - else
 	%p
 		You don't have any notes yet. Please
