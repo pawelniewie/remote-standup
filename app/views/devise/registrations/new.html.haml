@@ -9,9 +9,5 @@
     = f.label :password
     %br/
     = f.password_field :password, class: 'form-control'
-  .form-group
-    = f.label :password_confirmation
-    %br/
-    = f.password_field :password_confirmation, class: 'form-control'
   %div= f.submit "Sign up", class: 'btn btn-primary'
 = render "devise/shared/links"
