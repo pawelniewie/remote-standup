@@ -20,3 +20,7 @@
 		You don't have any notes yet. Please
 		=link_to 'set up', :controller => 'settings', :action => 'show'
 		your account and check your mailbox.
+	%p
+		You can also add notes any time you want by sending them to
+		= succeed '.' do
+			%a{href: "mailto:#{current_user.reminder_inbox_email}"} your inbox

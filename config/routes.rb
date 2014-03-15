@@ -9,7 +9,13 @@ Public::Application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'welcome#index'
+  unauthenticated do
+    root 'welcome#index'
+  end
+
+  authenticated :user do
+    root 'notes#index', as: 'authenticated_root'
+  end
 
   get "about" => 'welcome#about'
   get "team" => 'welcome#team'

@@ -32,7 +32,7 @@
           %li{:class => ('active' if current_page? pricing_path)}
             %a.menu-item{href: pricing_path} Pricing
         -if user_signed_in?
-          %li{:class => ('active' if current_page? notes_path)}
+          %li{:class => ('active' if current_page? notes_path or current_page? root_path)}
             %a.menu-item{href: notes_path} Notes
           %li.dropdown{:class => ('active' if current_page? settings_path or current_page? new_user_invitation_path)}
             %a#account-drop.dropdown-toggle{"data-toggle" => "dropdown", href: about_path} Account +

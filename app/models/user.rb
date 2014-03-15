@@ -70,4 +70,8 @@ class User < ActiveRecord::Base
     save
 		SendReminderEmailWorker.perform_async(id)
 	end
+
+	def reminder_inbox_email
+		"reminder-#{id}@in.remotestandup.com"
+	end
 end

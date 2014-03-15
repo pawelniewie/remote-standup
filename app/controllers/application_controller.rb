@@ -29,4 +29,13 @@ class ApplicationController < ActionController::Base
     Time.use_zone(current_user.timezone.blank? ?  'GMT' : current_user.timezone, &block)
   end
 
+  def after_sign_in_path_for(resource)
+    # After you enter login info and click submit, I want you to be sent to the registrations#show page
+    if current_user.sent_reminder_at.nil?
+      settings_path
+    else
+      notes_path
+    end
+  end
+
 end

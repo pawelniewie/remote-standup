@@ -4,7 +4,7 @@ class UserMailer < MandrillMailer::TemplateMailer
 
   def reminder_mail(user)
     mandrill_mail template: 'User Reminder',
-    	from: "reminder-#{user.id}@in.remotestandup.com",
+    	from: user.reminder_inbox_email,
       subject: 'Hey, what have you done lately?',
       to: { email: user.email, name: user.full_name },
       vars: {
