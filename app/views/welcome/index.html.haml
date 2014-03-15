@@ -4,34 +4,71 @@
     %section.static-banner.container
       .slide
         .col-md-7
-          %img.img-responsive{alt: "Slide 1", src: image_path('slide-1.png')}/
-        .col-md-5.caption
           %h2 Track your progress!
-          %p Respond to a daily reminder with what you did that day.
-          %p Next day get an update from your team.
-          %p Cannot be simpler.
-          %a.btn.btn-lg.btn-primary{href: new_user_registration_path} Try now for free
+          %h2
+            %small Respond to a daily email reminder with what you did that day.
+          %h2
+            %small Next day get an update from your team.
+          %h2
+            %small Cannot be simpler.
+
+        .col-md-5.caption
+          = form_for(resource, :as => resource_name, :url => registration_path(resource_name), html: {:role => 'form'}) do |f|
+            = devise_error_messages!
+            .form-group
+              = f.label :email
+              %br/
+              = f.email_field :email, class: 'form-control'
+            .form-group
+              = f.label :password
+              %br/
+              = f.password_field :password, class: 'form-control'
+            %div= f.submit "Sign up", class: 'btn btn-primary'
+
 #content
   .container
     .block
       %h2.title-divider
         %span
-          Foster
-          %span.de-em the communication
+          The easiest,
+          %span.de-em friendliest way to manage your team
 
-      %p Either when you work remotely or in one place you often find it hard to track the things you do daily to move forward.
+      .row
+        .col-md-6
+          %h5
+            Track
+            %span.de-em what's going on
 
-      %p
+          %p Either when you work remotely or in one place you often find it hard to track the things you do daily to move forward.
 
-    .block
-      %h2.title-divider
-        %span
-          Build
-          %span.de-em your history
+          %p We will remind your whole team to communicate and report their progrees so you don't loose track.
 
-      %p Make performance reviews a story of the past. By tracking your accomplishements and problems daily you can easily discover areas for improvement.
+        .col-md-6
+          %h5
+            Report
+            %span.de-em progress
 
-      %p Help yourself understand how much of a progress you did. See a bigger picture from a time perspective and be proud of what you accomplished.
+          %p It's easier to report you status to stakeholders if you have a history of your team's achievements.
+
+          %p Be always prepared to tell what's going on in your team and project.
+      .row
+        .col-md-6
+          %h5
+            You
+            %span.de-em already know it
+
+          %p Based on your habit of replying to email you don't have to change your workflow.
+
+          %p If you know how to write and read email, so you already know how to use RemoteStandup.
+
+        .col-md-6
+          %h5
+            Remember
+            %span.de-em what you did
+
+          %p Make performance reviews a story of the past. By tracking your accomplishements and problems daily you can easily discover areas for improvement.
+
+          %p Help yourself understand how much of a progress you did. See a bigger picture from a time perspective and be proud of what you accomplished.
 
     / Services
     / .block.features
