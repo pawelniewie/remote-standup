@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
 
 	has_many :notes, dependent: :destroy
 	has_many :invitations, :class_name => self.to_s, :as => :invited_by
-	belongs_to :admin, :class_name => self.to_s
+	belongs_to :team, :class_name => self.to_s
 
 	def members
 		@members ||= User.where(:admin_id => admin.nil? ? id : admin.id).order('email')
