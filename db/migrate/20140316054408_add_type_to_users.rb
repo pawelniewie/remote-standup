@@ -1,4 +1,4 @@
-class AddIsAdminToUsers < ActiveRecord::Migration
+class AddTypeToUsers < ActiveRecord::Migration
   def change
   	add_column :users, :type, :text, {null: false, default: 'User'}
   	rename_column :users, :admin_id, :team_id
