@@ -1,4 +1,7 @@
 class User < ActiveRecord::Base
+	belongs_to :team, :inverse_of => :users
+  validates_presence_of :team
+
 	# Include default devise modules. Others available are:
 	# :confirmable, :lockable, :timeoutable and :omniauthable
 	devise :invitable, :database_authenticatable, :registerable, :confirmable,
@@ -20,7 +23,6 @@ class User < ActiveRecord::Base
 
 	has_many :notes, dependent: :destroy
 	has_many :invitations, :class_name => self.to_s, :as => :invited_by
-	belongs_to :team, :class_name => self.to_s
 
 	def members
 		@members ||= User.where(:admin_id => admin.nil? ? id : admin.id).order('email')
@@ -74,4 +76,9 @@ class User < ActiveRecord::Base
 	def reminder_inbox_email
 		"reminder-#{id}@in.remotestandup.com"
 	end
+
+	def admin?
+		type == 'Admin'
+	end
+
 end
