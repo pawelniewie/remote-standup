@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
 	belongs_to :team, :inverse_of => :users
-  validates_presence_of :team
+  	after_create :update_team
 
 	# Include default devise modules. Others available are:
 	# :confirmable, :lockable, :timeoutable and :omniauthable
@@ -25,7 +25,7 @@ class User < ActiveRecord::Base
 	has_many :invitations, :class_name => self.to_s, :as => :invited_by
 
 	def members
-		@members ||= User.where(:admin_id => admin.nil? ? id : admin.id).order('email')
+		@members ||= User.where("team_id = ? AND id != ?", self.team_id, self.id).order('email')
 	end
 
 	def self.new_with_session(params,session)
@@ -79,6 +79,14 @@ class User < ActiveRecord::Base
 
 	def admin?
 		type == 'Admin'
+	end
+
+	def update_team
+	  # get or create a subdomain on creating a new user
+	  unless team
+	  	self.team ||= Team.create!
+	  	self.save
+	  end
 	end
 
 end

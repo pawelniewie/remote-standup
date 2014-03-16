@@ -94,7 +94,7 @@ ActiveRecord::Schema.define(version: 20140316060052) do
     t.text     "unconfirmed_email"
     t.text     "provider"
     t.text     "uid"
-    t.string   "invitation_token"
+    t.text     "invitation_token"
     t.datetime "invitation_created_at"
     t.datetime "invitation_sent_at"
     t.datetime "invitation_accepted_at"

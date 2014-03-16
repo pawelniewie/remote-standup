@@ -5,7 +5,7 @@ class Users::InvitationsController < Devise::InvitationsController
   def invite_resource
     # copy team id
     resource_class.invite!(invite_params, current_inviter) do |u|
-      u.admin = current_inviter.admin.nil? ? current_inviter : current_inviter.admin
+      u.team = current_inviter.team
     end
   end
 
