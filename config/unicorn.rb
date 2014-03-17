@@ -19,6 +19,8 @@ if File.directory? ('/var/www/remotestandup.com')
   # Listen on a Unix data socket
   pid '/var/www/remotestandup.com/shared/tmp/pids/unicorn.pid'
   listen "/var/www/remotestandup.com/tmp/sockets/remotestandup.com.sock", :backlog => 2048
+  stderr_path "/var/www/remotestandup.com/current/log/unicorn.log"
+  stdout_path "/var/www/remotestandup.com/current/log/unicorn.log"
 
   before_exec do |server|
     ENV["BUNDLE_GEMFILE"] = "/var/www/remotestandup.com/current/Gemfile"
