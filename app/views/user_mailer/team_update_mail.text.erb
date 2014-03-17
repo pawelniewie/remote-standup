@@ -1,0 +1,14 @@
+Hi <%= @user.calling_name %>,
+here's what you team did recently:
+===============================================
+
+<% @notes.each do |note| %>
+	<%= note.user.calling_name.nil? or note.user.calling_name.empty? ? note.user.email : note.user.calling_name %> at <%= note.created_at %>
+
+	<%= note.note %>
+<% end %>
+
+Reply to this email to share you update.
+
+Cheers,
+RemoteStandup

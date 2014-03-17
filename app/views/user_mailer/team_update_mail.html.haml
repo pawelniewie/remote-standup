@@ -1,0 +1,19 @@
+!!!
+%html
+  %head
+    %meta{content: "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+  %body
+    %h1
+      Hi
+      - succeed ',' do
+        = @user.calling_name
+      here's what your team did recently:
+
+    - @notes.each do |note|
+      %h3
+        = note.user.calling_name.nil? or note.user.calling_name.empty? ? note.user.email : note.user.calling_name
+        wrote at
+        = note.created_at
+
+      %div
+        =simple_format note.note

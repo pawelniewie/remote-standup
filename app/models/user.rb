@@ -73,6 +73,13 @@ class User < ActiveRecord::Base
 		SendReminderEmailWorker.perform_async(id)
 	end
 
+	def send_team_update
+		notes_from = self.sent_team_update_at.nil? ? Time.now - 1.day : self.sent_team_update_at
+		update_attribute :sent_team_update_at, Time.now
+		save
+		EmailTeamUpdateWorker.perform_async(id, notes_from)
+	end
+
 	def reminder_inbox_email
 		"reminder-#{id}@in.remotestandup.com"
 	end
