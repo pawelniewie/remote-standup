@@ -13,8 +13,8 @@ class IncomingController < ApplicationController
 					from_name: event_payload['msg']['from_name'],
 					headers: event_payload['msg']['headers'],
 					raw_payload: event_payload.to_s,
-					message_text: event_payload['msg']['text'],
-					message_html: event_payload['msg']['html'],
+					message_text: default(event_payload['msg']['text'], ''),
+					message_html: default(event_payload['msg']['html'], ''),
 	      	note: extract_note(event_payload['msg']['text']),
 	      	team: user.team
 	      )
@@ -24,6 +24,12 @@ class IncomingController < ApplicationController
 		else
 			logger.warn("Unrecognized recipient #{event_payload['msg']['headers']['To']}")
 		end
+  end
+
+  private
+
+  def default(str, default)
+  	str.nil? ? default : str
   end
 
 end
