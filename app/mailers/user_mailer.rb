@@ -19,7 +19,7 @@ class UserMailer < MandrillMailer::TemplateMailer
     @user = user
     @notes = notes
 
-    mail to: { email: user.email, name.user.full_name },
+    mail to: { email: user.email, name: name.user.full_name },
       from: user.reminder_inbox_email,
       subject: 'Hey, here\' your team update!'
   end
