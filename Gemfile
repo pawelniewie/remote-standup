@@ -57,7 +57,6 @@ gem 'gibbon'
 gem 'intercom-rails', '~> 0.2.24'
 gem 'mandrill-api', :require => "mandrill"
 gem 'mandrill-rails'
-gem 'mandrill_mailer'
 gem 'sidekiq'
 gem 'sidetiq'
 gem 'email_reply_parser', github: 'raymccoy/email_reply_parser', branch: 'improved-sig-parsing'
@@ -82,9 +81,16 @@ end
 
 group :development, :test do
 	gem 'minitest'
-	gem 'capybara'
-	gem 'rspec-rails'
 	gem 'erb2haml'
+
+	gem 'spork', '~> 1.0rc'
+	gem 'factory_girl_rails'
+	gem 'database_cleaner'
+	gem 'capybara'
+	gem 'capybara-screenshot'
+	gem 'rspec-rails'
+	gem 'selenium-webdriver'
+	gem "rack_session_access"
 
 	gem 'capistrano'
 	gem 'capistrano-rails'

@@ -1,27 +1,34 @@
-class UserMailer < MandrillMailer::TemplateMailer
+class UserMailer < ActionMailer::Base
   default from: "pawel@remotestandup.com"
   default from_name: "RemoteStandup"
 
   def reminder_mail(user)
-    mandrill_mail template: 'User Reminder',
+    @first_time = user.sent_reminder_at.nil?
+    @user = user
+    @members = user.members
+
+    mail to: get_email(user),
     	from: user.reminder_inbox_email,
-      subject: 'Hey, what have you done lately?',
-      to: { email: user.email, name: user.full_name },
-      vars: {
-      	'FIRST_TIME' => user.sent_reminder_at.nil?,
-      	'MEMBERS' => user.members.inject('') { |sum, user| sum += "<a href='mailto:#{user.email}'>#{user.calling_name.nil? or user.calling_name.empty? ? user.email : user.calling_name}</a> "}
-      },
-      inline_css: true,
-      async: false
+      subject: 'Hey, what have you done lately?'
   end
 
   def team_update_mail(user, notes)
     @user = user
     @notes = notes
 
-    mail to: { email: user.email, name: user.full_name },
+    mail to: get_email(user),
       from: user.reminder_inbox_email,
       subject: 'Hey, here\' your team update!'
+  end
+
+  private
+
+  def get_email(user)
+    if user.full_name.nil?
+      user.email
+    else
+      "#{user.full_name} <#{user.email}>"
+    end
   end
 
 end

@@ -1,0 +1,20 @@
+!!!
+%html
+  %head
+    %meta{content: "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+  %body
+    %div --
+    %p Please reply to this message and write down what you have been up to lately. The reply will be automatically forwarded to your team members and stored on our servers so you can review it later.
+    %p It's good to write about:
+    %ul
+      %li things you're grateful for
+      %li any tasks you did finish
+      %li any tasks that you wanted to finish but failed, treat them as a learning experience
+      %li any obstacles you have and ideas to solve them
+    - if @members.size > 0
+      %p
+        Your reply will be forwarded to
+        - @members.map { |member| member.calling_name.nil? or member.calling_name.empty? ? member.email : member.calling_name }.join(", ")
+    %p
+      If you have any questions or problems email
+      %a{href: "mailto:pawel@remotestandup.com"} pawel@remotestandup.com
