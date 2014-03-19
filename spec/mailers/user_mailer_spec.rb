@@ -27,7 +27,7 @@ describe UserMailer do
     let(:mail) { UserMailer.team_update_mail(user, []) }
 
     it 'renders the subject' do
-      mail.subject.should == 'Hey, here\' your team update!'
+      mail.subject.should == 'Hey, here\'s your team update!'
     end
 
     it 'renders the receiver email' do
