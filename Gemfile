@@ -4,8 +4,9 @@ ruby '2.1.1'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 4.0.2'
 
-# Google Analytics
+# Analytics
 gem 'rack-google-analytics'
+gem 'intercom-rails', '~> 0.2.24'
 
 # Authentication
 gem 'devise'
@@ -54,12 +55,15 @@ gem 'rails_stdout_logging'
 
 # Mails
 gem 'gibbon'
-gem 'intercom-rails', '~> 0.2.24'
 gem 'mandrill-api', :require => "mandrill"
 gem 'mandrill-rails'
 gem 'sidekiq'
 gem 'sidetiq'
 gem 'email_reply_parser', github: 'raymccoy/email_reply_parser', branch: 'improved-sig-parsing'
+
+# Data pulling
+gem 'mixpanel_client'
+gem 'intercom'
 
 # Views
 gem 'haml-rails'
