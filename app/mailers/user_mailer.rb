@@ -18,7 +18,7 @@ class UserMailer < ActionMailer::Base
 
     mail to: get_email(user),
       from: user.reminder_inbox_email,
-      subject: 'Hey, here\' your team update!'
+      subject: 'Hey, here\'s your team update!'
   end
 
   private
