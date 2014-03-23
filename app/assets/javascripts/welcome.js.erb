@@ -1,3 +1,4 @@
+<% environment.context_class.instance_eval { include Rails.application.routes.url_helpers } %>
 angular.module('teamstatus.public.newsletter', ['ui.bootstrap'])
 	.constant('path', "<%= newsletter_path %>")
 	.controller('NewsletterCtrl', ['$scope', '$http', 'path', function($scope, $http, path) {

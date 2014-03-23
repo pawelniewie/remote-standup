@@ -40,12 +40,12 @@ gem 'angular-ui-bootstrap-rails'
 gem 'less-rails'
 gem 'bootstrap-sass', '~> 3.1.0.0'
 gem 'font-awesome-rails'
+gem 'jquery-rails'
+
+gem 'haml-rails'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 gem 'therubyracer', platforms: :ruby
-
-# Use jquery as the JavaScript library
-gem 'jquery-rails'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
