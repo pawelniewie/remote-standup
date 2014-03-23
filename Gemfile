@@ -75,6 +75,9 @@ end
 group :production do
 	# Monitoring
 	gem 'newrelic_rpm'
+
+	# Better heroku support (serving static files and logging to stdout)
+	gem 'rails_12factor'
 end
 
 group :development, :test do
