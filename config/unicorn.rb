@@ -8,8 +8,6 @@ GC.respond_to?(:copy_on_write_friendly=) and
 
 check_client_connection false
 
-preload_app true
-
 # Restart any workers that haven't responded in 30 seconds
 timeout 30
 
@@ -18,7 +16,7 @@ if File.directory? ('/var/www/remotestandup.com')
 
   # Listen on a Unix data socket
   pid '/var/www/remotestandup.com/shared/tmp/pids/unicorn.pid'
-  listen "/var/www/remotestandup.com/tmp/sockets/remotestandup.com.sock", :backlog => 2048
+  listen "/var/www/remotestandup.com/tmp/sockets/unicorn.sock", :backlog => 2048
   stderr_path "/var/www/remotestandup.com/current/log/unicorn.log"
   stdout_path "/var/www/remotestandup.com/current/log/unicorn.log"
 
