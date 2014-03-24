@@ -1,7 +1,7 @@
 IntercomRails.config do |config|
   # == Intercom app_id
   # 
-  config.app_id = ENV["INTERCOM_APP_ID"] || "iy3k3dnc"
+  config.app_id = ENV["INTERCOM_APP_ID"] || "j9aomwvk"
 
   # == Intercom secret key 
   # This is required to enable secure mode, you can find it on your Intercom 
@@ -18,7 +18,7 @@ IntercomRails.config do |config|
   # == Enabled Environments
   # Which environments is auto inclusion of the Javascript enabled for
   #
-  config.enabled_environments = ["development", "production"]
+  config.enabled_environments = ["development", "staging", "production"]
 
   # == Current user method/variable
   # The method/variable that contains the logged in user in your controllers.
