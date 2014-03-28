@@ -1,4 +1,5 @@
 class Note < ActiveRecord::Base
+  include Tokenable
 
 	scope :first, -> { order("created_at").first }
   scope :last, -> { order("created_at DESC").first }
@@ -8,6 +9,7 @@ class Note < ActiveRecord::Base
 
   validates_presence_of :user
   validates_presence_of :team
+  validates_presence_of :token
 
   before_create do |note|
     if note.team.nil? and not note.user.nil?
@@ -18,4 +20,5 @@ class Note < ActiveRecord::Base
   def user
   	User.find(self.user_id)
   end
+
 end

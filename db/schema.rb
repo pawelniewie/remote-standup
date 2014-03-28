@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140316191443) do
+ActiveRecord::Schema.define(version: 20140328051009) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,9 +57,11 @@ ActiveRecord::Schema.define(version: 20140316191443) do
     t.datetime "updated_at"
     t.hstore   "headers",      default: {}, null: false
     t.uuid     "team_id"
+    t.text     "token",                     null: false
   end
 
   add_index "notes", ["team_id"], name: "index_notes_on_team_id", using: :btree
+  add_index "notes", ["token"], name: "index_notes_on_token", unique: true, using: :btree
   add_index "notes", ["user_id"], name: "index_notes_on_user_id", using: :btree
 
   create_table "teams", id: :uuid, default: "uuid_generate_v4()", force: true do |t|
