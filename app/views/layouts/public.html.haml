@@ -1,0 +1,15 @@
+= render :layout => 'layouts/basic' do
+
+	= render :partial => 'flash'
+
+	#content
+		.container
+			!= yield
+
+	%footer#footer
+		.container#navigation
+			%a.navbar-brand{href: root_path, title: "Home"}
+				%h3
+					%span> Remote
+					Standup
+			.slogan communicate your accomplishements every day

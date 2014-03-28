@@ -11,7 +11,8 @@
 					=image_tag note.user.gravatar_url, :class => 'img-circle'
 					=note.user.calling_name.nil? or note.user.calling_name.empty? ? note.user.email : note.user.calling_name
 				wrote at
-				=note.created_at
+				%a{:href => public_note_url(note)}
+					=note.created_at
 
 			%div.content
 				=simple_format note.note

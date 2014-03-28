@@ -1,7 +1,7 @@
 // Place all the styles related to the notes controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-.notes-index.page {
+.notes-index.page, .public-show.page {
 	.note {
 		.content {
 			border: solid transparent;
@@ -10,5 +10,14 @@
   		border-radius: 10px;
   		padding: 10px;
 		}
+	}
+}
+
+/* Customize container */
+@media (min-width: 768px) {
+	.public-show.page {
+		.container {
+	    max-width: 730px;
+	  }
 	}
 }

@@ -1,0 +1,9 @@
+.note
+	%h5
+		=image_tag @note.user.gravatar_url, :class => 'img-circle'
+		=@note.user.calling_name.nil? or @note.user.calling_name.empty? ? 'User' : @note.user.calling_name
+		wrote at
+		=@note.created_at
+
+	%div.content
+		=simple_format @note.note

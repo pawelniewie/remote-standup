@@ -1,63 +1,18 @@
-!!!
-%html{lang: "en", "xmlns:fb" => "http://ogp.me/ns/fb#", "xmlns:og" => "og: http://ogp.me/ns#"}
-	%head
-		%meta{content: "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
-		%meta{charset: "utf-8"}/
-		%title RemoteStandup - standups for a distributed team
-		%meta{content: "width=device-width, initial-scale=1.0", name: "viewport"}/
-		%meta{content: "Simple way to communicate your accomplishements when working remotely", name: "description"}/
-		%meta{content: "RemoteStandup", name: "author"}/
+= render :layout => 'layouts/basic' do
+	#navigation.wrapper
+		.navbar-static-top
+			= render :partial => 'hidden_header'
+			= render :partial => 'header_and_branding'
+			= render :partial => 'navigation'
 
-		/ To learn more about Open Graph, visit
-		/ 'https://developers.facebook.com/docs/opengraph/'
-		%meta{:content => "RemoteStandup", :property => "og:title"}/
-		%meta{:content => "website", :property => "og:type"}/
-		%meta{:content => "RemoteStandup", :property => "og:site_name"}/
-		%meta{:content => "http://remotestandup.com", :property => "og:url"}/
-		%meta{:content => "en_US", :property => "og:locale"}/
-		/ %meta{:content => "https://s3.amazonaws.com/teamstatus-assets/landing-page/V1/dashboard-tv.jpg", :property => "og:image"}/
-		%meta{:content => "Simple way to communicate your accomplishements when working remotely", :property => "og:description"}/
+	= render :partial => 'flash'
 
-		!= stylesheet_link_tag "application"
+	- if body_class == 'welcome-index'
+		!= yield
+	- else
+		#content
+			.container
+				!= yield
 
-		/ HTML5 shiv & respond.js for IE6-8 support of HTML5 elements & media queries
-		/[if lt IE 9]
-		!=javascript_include_tag "plugins/html5shiv/dist/html5shiv.js"
-		!=javascript_include_tag "plugins/respond/respond.min.js"
-		/ Le fav and touch icons - @todo: fill with your icons or remove
-		%link{href: image_path("icons/favicon.png"), rel: "shortcut icon"}/
-		%link{href: image_path("icons/114x114.png"), rel: "apple-touch-icon-precomposed", sizes: "114x114"}/
-		%link{href: image_path("icons/72x72.png"), rel: "apple-touch-icon-precomposed", sizes: "72x72"}/
-		%link{href: image_path("icons/default.png"), rel: "apple-touch-icon-precomposed"}/
-		%link{href: "//fonts.googleapis.com/css?family=Open+Sans:400,700,300|Rambla|Calligraffitti", rel: "stylesheet", type: "text/css"}/
-		/ Retina.js plugin - @see: http://retinajs.com/
-		!=javascript_include_tag "plugins/retina/js/retina-1.1.0.min.js"
-
-	%body.page{:class => body_class}
-		%a.sr-only{href: "#content"} Skip to content
-		#navigation.wrapper
-			.navbar-static-top
-				= render :partial => 'hidden_header'
-				= render :partial => 'header_and_branding'
-				= render :partial => 'navigation'
-
-		= render :partial => 'flash'
-
-		- if body_class == 'welcome-index'
-			!= yield
-		- else
-			#content
-				.container
-					!= yield
-
-		-unless user_signed_in?
-			= render :partial => 'ending_wrapper'
-
-		!=javascript_include_tag 'application'
-
-		- if mixpanel_id
-			:javascript
-				$(function() { mixpanel.track("Page Viewed", { "Page Id": "#{body_class}" }); });
-
-			:javascript
-				(function(e,b){if(!b.__SV){var a,f,i,g;window.mixpanel=b;a=e.createElement("script");a.type="text/javascript";a.async=!0;a.src=("https:"===e.location.protocol?"https:":"http:")+'//cdn.mxpnl.com/libs/mixpanel-2.2.min.js';f=e.getElementsByTagName("script")[0];f.parentNode.insertBefore(a,f);b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2}})(document,window.mixpanel||[]);mixpanel.init("#{mixpanel_id}");
+	-unless user_signed_in?
+		= render :partial => 'ending_wrapper'

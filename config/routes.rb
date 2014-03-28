@@ -31,6 +31,8 @@ Public::Application.routes.draw do
   get 'settings' => 'settings#show'
   put 'settings' => 'settings#update'
 
+  get 'p/n/:token' => 'public#show', as: 'public_note'
+
   resource :incoming, :controller => 'incoming', :only => [:show,:create]
   resources :notes
 
