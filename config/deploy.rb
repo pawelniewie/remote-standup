@@ -30,12 +30,16 @@ set :default_env, {
 namespace :deploy do
 
   desc 'Restart application'
-  task :restart, :on_error => :continue do
+  task :restart do
     on roles(:app), in: :sequence, wait: 5 do
       # Your restart mechanism here, for example:
       # execute :touch, release_path.join('tmp/restart.txt')
       execute :sv, 2, "/home/deployer/service/remotestandup"
-      execute :sv, 'restart', "/home/deployer/service/sidekiq"
+      begin
+        execute :sv, 'restart', "/home/deployer/service/sidekiq"
+      rescue
+        execute :sv, 'kill', "/home/deployer/service/sidekiq"
+      end
     end
   end
 
