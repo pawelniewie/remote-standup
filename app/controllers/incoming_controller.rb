@@ -8,7 +8,7 @@ class IncomingController < ApplicationController
 		if matches
 			begin
 				user = User.find(matches['uuid'])
-				user.notes.create(
+				user.notes.new(
 					from_email: event_payload['msg']['from_email'],
 					from_name: event_payload['msg']['from_name'],
 					headers: event_payload['msg']['headers'],
@@ -17,7 +17,7 @@ class IncomingController < ApplicationController
 					message_html: default(event_payload['msg']['html'], ''),
 	      	note: extract_note(event_payload['msg']['text']),
 	      	team: user.team
-	      )
+	      ).save!
 	    rescue ActiveRecord::RecordNotFound
 	    	logger.warn("No such recipient #{matches[:uuid]}")
 	    end

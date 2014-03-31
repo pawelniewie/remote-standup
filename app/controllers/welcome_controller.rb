@@ -36,45 +36,8 @@ class WelcomeController < ApplicationController
     return_status_accepted
   end
 
-  def s3
-    cookies[:fileDownload] = { :path => '/', :value => 'true', :expires => 5.minutes.from_now }
-    redirect_to ENV['DOWNLOAD_URL']
-  end
-
-  def download
-    email = params['email']
-
-    Intercom::User.create(:email => email, :created_at => Time.now())
-    Intercom::Tag.create(:name => 'Download', :emails => [email], :tag_or_untag => 'tag')
-
-    begin
-      message = {
-        :subject=> "Download for TeamStatus.TV",
-        :text=>"Download from:\nFirst Name: #{params['first_name']}\nLast Name: #{params['last_name']}\nEmail: #{params['email']}\n",
-        :from_name=> "TeamStatus.TV",
-        :from_email=> "root@remotestandup.com",
-        :to=>[
-          {:email => "pawel@remotestandup.com", :name => "Pawel Niewiadomski"}
-        ]
-      }
-      mandrill.messages.send message
-    rescue Mandrill::Error => e
-      logger.error("A mandrill error occurred: #{e.class} - #{e.message}")
-      raise e
-    end
-
-    respond_to do |format|
-      format.html { redirect_to ENV['DOWNLOAD_URL'] }
-      format.json { head :no_content }
-    end
-  end
-
   def blog
     redirect_to 'http://blog.teamstatus.tv'
-  end
-
-  def demo
-    redirect_to 'http://demo.teamstatus.tv'
   end
 
   def features
