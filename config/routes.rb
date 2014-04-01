@@ -34,7 +34,10 @@ Public::Application.routes.draw do
   get 'p/n/:token' => 'public#show', as: 'public_note'
 
   resource :incoming, :controller => 'incoming', :only => [:show,:create]
-  resources :notes
+
+  resources :discussions do
+    resources :notes
+  end
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

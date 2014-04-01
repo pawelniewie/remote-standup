@@ -11,12 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140328051009) do
+ActiveRecord::Schema.define(version: 20140401191927) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "uuid-ossp"
   enable_extension "hstore"
+  enable_extension "uuid-ossp"
 
   create_table "authorizations", force: true do |t|
     t.text     "username"
@@ -45,21 +45,32 @@ ActiveRecord::Schema.define(version: 20140328051009) do
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
 
+  create_table "discussions", id: :uuid, default: "uuid_generate_v4()", force: true do |t|
+    t.text     "title",      null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.uuid     "team_id"
+  end
+
+  add_index "discussions", ["team_id"], name: "index_discussions_on_team_id", using: :btree
+
   create_table "notes", force: true do |t|
-    t.text     "from_email",   default: "", null: false
-    t.text     "from_name",    default: "", null: false
-    t.text     "raw_payload",  default: "", null: false
-    t.text     "message_text", default: "", null: false
-    t.text     "message_html", default: "", null: false
-    t.text     "note",         default: "", null: false
+    t.text     "from_email",    default: "", null: false
+    t.text     "from_name",     default: "", null: false
+    t.text     "raw_payload",   default: "", null: false
+    t.text     "message_text",  default: "", null: false
+    t.text     "message_html",  default: "", null: false
+    t.text     "note",          default: "", null: false
     t.uuid     "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.hstore   "headers",      default: {}, null: false
+    t.hstore   "headers",       default: {}, null: false
     t.uuid     "team_id"
-    t.text     "token",                     null: false
+    t.text     "token",                      null: false
+    t.uuid     "discussion_id"
   end
 
+  add_index "notes", ["discussion_id"], name: "index_notes_on_discussion_id", using: :btree
   add_index "notes", ["team_id"], name: "index_notes_on_team_id", using: :btree
   add_index "notes", ["token"], name: "index_notes_on_token", unique: true, using: :btree
   add_index "notes", ["user_id"], name: "index_notes_on_user_id", using: :btree
@@ -98,7 +109,7 @@ ActiveRecord::Schema.define(version: 20140328051009) do
     t.text     "unconfirmed_email"
     t.text     "provider"
     t.text     "uid"
-    t.string   "invitation_token"
+    t.text     "invitation_token"
     t.datetime "invitation_created_at"
     t.datetime "invitation_sent_at"
     t.datetime "invitation_accepted_at"

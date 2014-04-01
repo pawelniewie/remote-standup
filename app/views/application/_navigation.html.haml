@@ -25,15 +25,15 @@
       / main navigation
       %ul.nav.navbar-nav
         %li.home-link
-          =link_to user_signed_in? ? notes_path : root_path do
+          =link_to user_signed_in? ? discussions_path : root_path do
             %i.fa.fa-home
             %span.hidden Home
         -unless user_signed_in?
           %li{:class => ('active' if current_page? pricing_path)}
             %a.menu-item{href: pricing_path} Pricing
         -if user_signed_in?
-          %li{:class => ('active' if current_page? notes_path or current_page? root_path)}
-            %a.menu-item{href: notes_path} Notes
+          %li{:class => ('active' if current_page? discussions_path or current_page? root_path)}
+            %a.menu-item{href: discussions_path} Discussions
           %li.dropdown{:class => ('active' if current_page? settings_path or current_page? new_user_invitation_path or current_page? edit_user_registration_path)}
             %a#account-drop.dropdown-toggle{"data-toggle" => "dropdown", href: about_path} Account +
             %ul.dropdown-menu{"aria-labelledby" => "account-drop", role: "menu"}
