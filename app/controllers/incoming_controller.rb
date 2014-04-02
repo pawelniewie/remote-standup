@@ -4,16 +4,26 @@ class IncomingController < ApplicationController
 	# authenticate_with_mandrill_keys! 'MANDRILL_WEBHOOKS_KEY'
 
 	def handle_inbound(event_payload)
-		recipient = event_payload['msg']['headers']['To']
-		target, id = target_and_id(recipient)
+		target, id = target_and_id(event_payload['msg']['to'])
 		if target and id
 			begin
 				if target == 'team'
-					notes = Team.find(id).notes
+					user = User.find(:email => event_payload['msg']['from_email'])
+					discussion = Team.find(id).discussions.new(:title => event_payload['msg']['subject'].presence || 'New discussion').save!
+					notes = discussion.notes
 				elsif target == 'discussion'
 					notes = Discussion.find(id).notes
+					user = User.find(:email => event_payload['msg']['from_email'])
 				elsif target == 'reminder'
-					notes = User.find(id).team.notes
+					user = User.find(id)
+					Time.use_zone(user.timezone.presence || 'GMT') do
+						title = 'Team Update from ' + Time.now.to_s(:year_month_day)
+						discussion = Discussion.find_by_title(title)
+						if discussion.nil?
+							discussion = user.team.discussions.new(:title => title).save!
+						end
+					end
+					notes = discussion.notes
 				end
 
 				notes.new(
@@ -21,10 +31,9 @@ class IncomingController < ApplicationController
 					from_name: event_payload['msg']['from_name'],
 					headers: event_payload['msg']['headers'],
 					raw_payload: event_payload.to_s,
-					message_text: default(event_payload['msg']['text'], ''),
-					message_html: default(event_payload['msg']['html'], ''),
-	      	note: extract_note(event_payload['msg']['text']),
-	      	team: user.team
+					message_text: event_payload['msg']['text'].presence || '',
+					message_html: event_payload['msg']['html'].presence || '',
+	      	note: extract_note(event_payload['msg']['text'])
 	      ).save!
 	    rescue ActiveRecord::RecordNotFound
 	    	logger.warn("No such recipient #{matches[:uuid]}")
@@ -36,15 +45,13 @@ class IncomingController < ApplicationController
 
   private
 
-  def default(str, default)
-  	str.nil? ? default : str
-  end
-
-  def target_and_id(email)
-  	matches = /(?<target>).+[+-](?<uuid>[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})/.match(email)
-  	if matches and not matches[:target].blank? and not matches[:uuid].blank?
-  		matches[:target], matches[:uuid]
-  	end
+  def target_and_id(emails)
+  	emails.each do |to_email, to_name|
+	  	matches = /(?<target>).+[+-](?<uuid>[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})@/.match(to_email)
+	  	if matches and not matches[:target].blank? and not matches[:uuid].blank?
+	  		return matches[:target], matches[:uuid]
+	  	end
+	  end
   	nil, nil
   end
 end
