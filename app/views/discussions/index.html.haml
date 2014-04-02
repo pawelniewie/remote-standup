@@ -7,7 +7,7 @@
 	- @discussions.each do |discussion|
 		.note
 			%h5
-				%a{href: url_for()}
+				%a{href: discussion_notes_url(discussion)}
 					=discussion.title
 				created
 				%time{'datetime' => discussion.created_at}
