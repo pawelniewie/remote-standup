@@ -4,11 +4,19 @@ class IncomingController < ApplicationController
 	# authenticate_with_mandrill_keys! 'MANDRILL_WEBHOOKS_KEY'
 
 	def handle_inbound(event_payload)
-		matches = /(?<uuid>[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})/.match(event_payload['msg']['headers']['To'])
-		if matches
+		recipient = event_payload['msg']['headers']['To']
+		target, id = target_and_id(recipient)
+		if target and id
 			begin
-				user = User.find(matches['uuid'])
-				user.notes.new(
+				if target == 'team'
+					notes = Team.find(id).notes
+				elsif target == 'discussion'
+					notes = Discussion.find(id).notes
+				elsif target == 'reminder'
+					notes = User.find(id).team.notes
+				end
+
+				notes.new(
 					from_email: event_payload['msg']['from_email'],
 					from_name: event_payload['msg']['from_name'],
 					headers: event_payload['msg']['headers'],
@@ -32,4 +40,11 @@ class IncomingController < ApplicationController
   	str.nil? ? default : str
   end
 
+  def target_and_id(email)
+  	matches = /(?<target>).+[+-](?<uuid>[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})/.match(email)
+  	if matches and not matches[:target].blank? and not matches[:uuid].blank?
+  		matches[:target], matches[:uuid]
+  	end
+  	nil, nil
+  end
 end

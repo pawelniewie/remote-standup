@@ -3,6 +3,9 @@
 		Discussions
 	%small List of your all discussions
 
+.btn-group
+	%a.btn.btn-primary{href: 'mailto:' + @current_user.team.team_inbox} Start a discussion
+
 - unless @discussions.empty?
 	- @discussions.each do |discussion|
 		.note

@@ -60,6 +60,7 @@ gem 'mandrill-rails'
 gem 'sidekiq'
 gem 'sidetiq'
 gem 'email_reply_parser', github: 'raymccoy/email_reply_parser', branch: 'improved-sig-parsing'
+gem 'vpim-rails'
 
 # Data pulling
 gem 'mixpanel_client'
