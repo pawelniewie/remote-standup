@@ -35,8 +35,8 @@ class IncomingController < ApplicationController
 					message_html: event_payload['msg']['html'].presence || '',
 	      	note: extract_note(event_payload['msg']['text'])
 	      ).save!
-	    rescue ActiveRecord::RecordNotFound
-	    	logger.warn("No such recipient #{matches[:uuid]}")
+	    rescue => e
+	    	logger.warn("No such recipient or other error #{e}")
 	    end
 		else
 			logger.warn("Unrecognized recipient #{event_payload['msg']['headers']['To']}")
