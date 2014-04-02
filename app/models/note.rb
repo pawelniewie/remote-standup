@@ -9,6 +9,7 @@ class Note < ActiveRecord::Base
 
   validates_presence_of :user
   validates_presence_of :team
+  validates_presence_of :discussion
   validates_presence_of :token
 
   before_create do |note|

@@ -81,7 +81,7 @@ class User < ActiveRecord::Base
 	end
 
 	def reminder_inbox_email
-		"reminder-#{id}@in.remotestandup.com"
+		"reminder+#{id}@in.remotestandup.com"
 	end
 
 	def admin?
