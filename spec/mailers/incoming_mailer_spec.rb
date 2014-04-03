@@ -1,5 +1,6 @@
 require 'spec_helper'
 
+# https://github.com/bmabey/email-spec
 describe IncomingMailer do
   describe 'invalid_recipient_mail' do
     let(:user) { create(:user) }

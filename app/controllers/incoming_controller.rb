@@ -3,6 +3,8 @@ class IncomingController < ApplicationController
 	include Mandrill::Rails::WebHookProcessor
 	# authenticate_with_mandrill_keys! 'MANDRILL_WEBHOOKS_KEY'
 
+	skip_around_filter :user_time_zone
+
 	def handle_inbound(event_payload)
 		recipient = event_payload['msg']['headers']['To']
 		target, id = target_and_id(event_payload['msg']['to'])

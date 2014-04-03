@@ -6,9 +6,11 @@ describe IncomingController do
 		let(:example_payload) { mandrill_example_event('wrong_recipient') }
 
 		it 'should sent a message when recipient is invalid' do
-			IncomingMailer.should_receive(:invalid_recipient_mail).with("email@example.com", "Jimmy Bean")
+			message = mock('Message')
+			IncomingMailer.should_receive(:invalid_recipient_mail).with("from@example.com", "inbox@example.com").and_return(message)
+			message.should_receive(:deliver)
 
-			pending 'write a test here'
+			post :create, :mandrill_events => [ example_payload ].to_json, format: :json
 		end
 	end
 end
