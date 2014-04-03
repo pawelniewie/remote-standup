@@ -1,5 +1,6 @@
 require 'rubygems'
 require 'spork'
+require "email_spec"
 #uncomment the following line to use spork with the debugger
 #require 'spork/ext/ruby-debug'
 
@@ -35,6 +36,8 @@ Spork.prefork do
 
     config.include FactoryGirl::Syntax::Methods
     config.include Capybara::DSL, :type => :request
+    config.include EmailSpec::Helpers
+    config.include EmailSpec::Matchers
 
     # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
     # config.fixture_path = "#{::Rails.root}/spec/fixtures"

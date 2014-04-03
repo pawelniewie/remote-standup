@@ -85,6 +85,9 @@ group :development, :test do
 	gem 'minitest'
 	gem 'erb2haml'
 
+	gem 'shoulda'
+	gem 'email_spec'
+
 	gem 'spork', '~> 1.0rc'
 	gem 'factory_girl_rails'
 	gem 'database_cleaner'

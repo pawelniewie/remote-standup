@@ -4,6 +4,7 @@ class IncomingController < ApplicationController
 	# authenticate_with_mandrill_keys! 'MANDRILL_WEBHOOKS_KEY'
 
 	def handle_inbound(event_payload)
+		recipient = event_payload['msg']['headers']['To']
 		target, id = target_and_id(event_payload['msg']['to'])
 		if target and id
 			begin
@@ -35,11 +36,15 @@ class IncomingController < ApplicationController
 					message_html: event_payload['msg']['html'].presence || '',
 	      	note: extract_note(event_payload['msg']['text'])
 	      ).save!
+	    rescue ActiveRecord::RecordNotFound
+				logger.warn("Unrecognized recipient #{recipient}")
+	    	IncomingMailer.invalid_recipient_mail(event_payload['msg']['from_email'], recipient).deliver
 	    rescue => e
-	    	logger.warn("No such recipient or other error #{e}")
+	    	logger.error("No such recipient or other error #{e}")
 	    end
 		else
-			logger.warn("Unrecognized recipient #{event_payload['msg']['headers']['To']}")
+			logger.warn("Unrecognized recipient #{recipient}")
+			IncomingMailer.invalid_recipient_mail(event_payload['msg']['from_email'], recipient).deliver
 		end
   end
 
@@ -52,6 +57,6 @@ class IncomingController < ApplicationController
 	  		return matches[:target], matches[:uuid]
 	  	end
 	  end
-  	nil, nil
+  	nil
   end
 end
