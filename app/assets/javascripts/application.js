@@ -29,8 +29,4 @@
 // Custom scripts mainly used to trigger libraries
 //= require script.min.js
 
-//= require ./welcome
-//= require ./settings
-//= require ./mixpanel
-//= require ./time
-//= require ./survicate
+//= require_tree .
