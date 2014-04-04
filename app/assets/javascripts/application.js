@@ -33,3 +33,4 @@
 //= require ./settings
 //= require ./mixpanel
 //= require ./time
+//= require ./survicate
