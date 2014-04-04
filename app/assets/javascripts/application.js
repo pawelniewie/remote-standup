@@ -32,3 +32,4 @@
 //= require ./welcome
 //= require ./settings
 //= require ./mixpanel
+//= require ./survicate
