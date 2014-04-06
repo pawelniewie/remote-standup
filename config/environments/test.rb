@@ -40,4 +40,7 @@ Public::Application.configure do
   config.active_support.deprecation = :stderr
 
   config.action_mailer.default_url_options = { :host => 'lvh.me:5000' }
+
+  # Set to :debug to see everything in the log.
+  config.log_level = :debug
 end
