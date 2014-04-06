@@ -6,11 +6,11 @@ describe UserMailer do
     let(:mail) { UserMailer.reminder_mail(user) }
 
     it 'renders the subject' do
-      mail.subject.should == 'Hey, what have you done lately?'
+      mail.should have_subject 'Hey, what have you done lately?'
     end
 
     it 'renders the receiver email' do
-      mail.to.should == "Jessica Parker <>"
+      mail.should deliver_to 'Jessica Parker <jp@corp.com>'
     end
 
     it 'renders the sender email' do
@@ -18,7 +18,7 @@ describe UserMailer do
     end
 
     it 'doesn\'t render members' do
-      mail.body.encoded.should_not match("reply will be forwarded to")
+      mail.should_not have_body_text "reply will be forwarded to"
     end
   end
 
@@ -27,11 +27,11 @@ describe UserMailer do
     let(:mail) { UserMailer.team_update_mail(user, []) }
 
     it 'renders the subject' do
-      mail.subject.should == 'Hey, here\'s your team update!'
+      mail.should have_subject 'Hey, here\'s your team update!'
     end
 
     it 'renders the receiver email' do
-      mail.to.should == "Jessica Parker <>"
+      mail.should deliver_to 'Jessica Parker <jp@corp.com>'
     end
 
     it 'renders the sender email' do
