@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
 	belongs_to :team, :inverse_of => :users
-  	after_create :update_team
+  after_create :update_team
 
 	# Include default devise modules. Others available are:
 	# :confirmable, :lockable, :timeoutable and :omniauthable

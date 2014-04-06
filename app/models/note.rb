@@ -6,6 +6,7 @@ class Note < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :team
+  belongs_to :discussion
 
   validates_presence_of :user
   validates_presence_of :team
