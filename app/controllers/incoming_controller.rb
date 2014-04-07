@@ -60,8 +60,8 @@ class IncomingController < ApplicationController
 					discussion = user.team.discussions.new(:title => title)
 					discussion.save!
 				end
+				create_note(user, discussion.notes, event_payload)
 			end
-			create_note(user, discussion.notes, event_payload)
 		else
 			IncomingMailer.invalid_recipient_mail(get_from_from(event_payload), get_to_from(event_payload)).deliver
 		end
