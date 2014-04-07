@@ -14,7 +14,7 @@ Public::Application.routes.draw do
   end
 
   authenticated :user do
-    root 'notes#index', as: 'authenticated_root'
+    root 'discussions#index', as: 'authenticated_root'
   end
 
   get "about" => 'welcome#about'
