@@ -23,7 +23,6 @@ end
 
 require 'rubygems'
 require 'spork'
-require "email_spec"
 #uncomment the following line to use spork with the debugger
 #require 'spork/ext/ruby-debug'
 
@@ -39,6 +38,8 @@ Spork.prefork do
   require 'capybara/rspec'
   require 'capybara-screenshot/rspec'
   require 'rack_session_access/capybara'
+
+  require "email_spec"
 
   # Requires supporting ruby files with custom matchers and macros, etc,
   # in spec/support/ and its subdirectories.

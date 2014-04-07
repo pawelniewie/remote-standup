@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe UserMailer do
   describe 'reminder_mail' do
-    let(:user) { create(:user) }
+    let(:user) { create(:user, :with_team) }
     let(:mail) { UserMailer.reminder_mail(user) }
 
     it 'renders the subject' do
@@ -23,7 +23,7 @@ describe UserMailer do
   end
 
   describe 'team_update_mail' do
-    let(:user) { create(:user) }
+    let(:user) { create(:user, :with_team) }
     let(:mail) { UserMailer.team_update_mail(user, []) }
 
     it 'renders the subject' do

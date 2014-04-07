@@ -1,3 +1,4 @@
+require 'spec_helper'
 
 # https://github.com/bmabey/email-spec
 describe IncomingMailer do
