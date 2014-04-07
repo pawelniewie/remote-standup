@@ -9,17 +9,13 @@ class IncomingController < ApplicationController
 		target, id = target_and_id(event_payload['msg']['to'])
 
 		if target and id
-			begin
-				case target
-				when 'team'
-					create_new_discussion(id, event_payload)
-				when 'discussion'
-					create_new_note(id, event_payload)
-				when 'reminder'
-					create_or_update_discussion(id, event_payload)
-				end
-			rescue => e
-				logger.error("No such recipient or other error: #{e} #{e.backtrace.join('\n')}")
+			case target
+			when 'team'
+				create_new_discussion(id, event_payload)
+			when 'discussion'
+				create_new_note(id, event_payload)
+			when 'reminder'
+				create_or_update_discussion(id, event_payload)
 			end
 		else
 			logger.warn("Unrecognized recipient: #{get_to_from(event_payload)}")
