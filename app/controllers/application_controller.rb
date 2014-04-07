@@ -34,7 +34,7 @@ class ApplicationController < ActionController::Base
     if current_user.sent_reminder_at.nil?
       settings_path
     else
-      notes_path
+      discussions_path
     end
   end
 
