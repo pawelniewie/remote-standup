@@ -33,7 +33,7 @@
             %a.menu-item{href: pricing_path} Pricing
         -if user_signed_in?
           %li{:class => ('active' if current_page? discussions_path or current_page? root_path or current_page? discussion_notes_path)}
-            %a.menu-item{href: discussions_path} Discussions
+            %a.menu-item{href: discussions_path} Updates
           %li.dropdown{:class => ('active' if current_page? settings_path or current_page? new_user_invitation_path or current_page? edit_user_registration_path)}
             %a#account-drop.dropdown-toggle{"data-toggle" => "dropdown", href: about_path} Account +
             %ul.dropdown-menu{"aria-labelledby" => "account-drop", role: "menu"}
