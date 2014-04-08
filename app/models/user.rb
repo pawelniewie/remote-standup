@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
 	belongs_to :team, :inverse_of => :users
+
+	after_initialize :init
   after_create :update_team
 
 	# Include default devise modules. Others available are:
@@ -94,6 +96,10 @@ class User < ActiveRecord::Base
 	  	self.team ||= Team.create!
 	  	self.save
 	  end
+	end
+
+	def init
+		self.remind_on ||= [1, 2, 3, 4, 5]
 	end
 
 end

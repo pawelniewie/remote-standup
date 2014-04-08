@@ -18,6 +18,8 @@
 //= require angular-route
 //= require angular-resource
 //= require angular-ui-bootstrap-tpls
+//= require moment
+//= require moment-timezone/moment-timezone
 
 //= require jquery-migrate-1.2.1.min.js
 // Legacy jQuery support for quicksand plugin

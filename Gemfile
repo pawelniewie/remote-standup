@@ -93,6 +93,7 @@ group :development, :test do
 	gem 'database_cleaner'
 	gem 'capybara'
 	gem 'capybara-screenshot'
+	gem 'site_prism'
 	gem 'rspec-rails'
 	gem 'selenium-webdriver'
 	gem "rack_session_access"

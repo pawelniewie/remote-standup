@@ -6,9 +6,6 @@
 //= require angular-filters/dist/angular-filters.min.js
 //= require detect_timezone
 //= require jquery.detect_timezone
-//= require moment
-//= require moment-timezone/moment-timezone
-//= require ./moment-timezone-data.js
 angular.module('remotestandup.settings', [
 	'ngAnimate',
 	'angular-underscore',

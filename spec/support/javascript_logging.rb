@@ -16,12 +16,12 @@ RSpec.configure do |config|
 
       if errors.any?
         puts '-------------------------------------------------------------'
-        puts "Found #{errors.length} javascript #{pluralize(errors.length, 'error')}"
+        puts "Found #{errors.length} javascript errors"
         puts '-------------------------------------------------------------'
         errors.each do |error|
           puts "    #{error["errorMessage"]} (#{error["sourceName"]}:#{error["lineNumber"]})"
         end
-        raise "Javascript #{pluralize(errors.length, 'error')} detected, see above"
+        raise "Javascript errors detected, see above"
       end
     end
   end
