@@ -17,6 +17,7 @@ role :db,  %w{deployer@remotestandup.com}
 server 'remotestandup.com', user: 'deployer', roles: %w{web app}, my_property: :my_value
 set :rails_env, 'production'
 set :branch, 'master'
+set :assets_prefix, 'production/assets'
 
 # you can set custom ssh options
 # it's possible to pass any option but you need to keep in mind that net/ssh understand limited list of options
