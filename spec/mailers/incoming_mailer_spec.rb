@@ -3,7 +3,7 @@ require 'spec_helper'
 # https://github.com/bmabey/email-spec
 describe IncomingMailer do
   describe 'invalid_recipient_mail' do
-    let(:user) { create(:user) }
+    let(:user) { create(:jessica) }
     let(:recipient_email) { 'team-1f32b674-9de9-435c-9bbf-42751d6b7e31@in.remotestandup.com' }
     let(:to_address) { 'pawel@example.com' }
     let(:mail) { IncomingMailer.invalid_recipient_mail(to_address, recipient_email) }

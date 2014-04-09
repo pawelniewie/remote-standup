@@ -37,8 +37,8 @@ class Discussion < ActiveRecord::Base
 		user = User.find_by_id(user_id) || User.find_by_email(incoming.from_address)
 		unless user.nil?
 			Time.use_zone(user.timezone.presence || 'GMT') do
-				title = 'Team Update from ' + Time.now.to_s(:year_month_day)
-				discussion = Discussion.find_by_title(title)
+				title = self.reminder_title
+				discussion = Discussion.find_by(:title => title, :team_id => user.team.id)
 				if discussion.nil?
 					discussion = user.team.discussions.new(:title => title)
 					discussion.save!
@@ -61,6 +61,10 @@ class Discussion < ActiveRecord::Base
 			note: incoming.simple_message,
 			user: user,
 			team: user.team).save!
+  end
+
+  def self.reminder_title
+  	'Team Update from ' + Time.now.to_s(:year_month_day)
   end
 
 end
