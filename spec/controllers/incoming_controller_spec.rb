@@ -38,7 +38,7 @@ describe IncomingController do
       end
 
       it 'should reject a message when discussion is unknown' do
-        create(:user)
+        create(:user, :full_name => 'Jessica Parker', :email => 'jp@corp.com')
 
         message = double('Message')
         IncomingMailer.should_receive(:invalid_discussion_mail).with("jp@corp.com", "discussion-e5205698-bc7d-11e3-9fdb-93b32c88ce36@in.remotestandup.com").and_return(message)
@@ -52,7 +52,7 @@ describe IncomingController do
 		context 'valid data' do
 
       it 'should create a new discussion' do
-        create(:team, :fixed_id, :with_user).id.should == '312dcfb0-bc7a-11e3-bd65-af2435c8a91b'
+        create(:team, :fixed_id, :with_jessica).id.should == '312dcfb0-bc7a-11e3-bd65-af2435c8a91b'
 
 				IncomingMailer.should_not_receive(:invalid_recipient_mail)
 
@@ -63,7 +63,7 @@ describe IncomingController do
 			end
 
 			it 'should create a new discussion for an incoming reminder' do
-        create(:user, :fixed_id, :team => create(:team)).id.should == '312dcfb0-bc7a-11e3-bd65-af2435c8a91b'
+        create(:user, :fixed_id, :full_name => 'Jessica Parker', :email => 'jp@corp.com', :team => create(:team)).id.should == '312dcfb0-bc7a-11e3-bd65-af2435c8a91b'
 
 				post :create, :mandrill_events => [ mandrill_example_event('reminder') ].to_json, format: :json
 				expect(response).to be_ok
@@ -72,7 +72,7 @@ describe IncomingController do
 			end
 
       it 'should add a note to an existing discussion' do
-        create(:discussion, :fixed_id).id.should == '312dcfb0-bc7a-11e3-bd65-af2435c8a91b'
+        create(:discussion, :fixed_id, :with_jessica).id.should == '312dcfb0-bc7a-11e3-bd65-af2435c8a91b'
 
         Discussion.last.notes.count.should == 0
 
