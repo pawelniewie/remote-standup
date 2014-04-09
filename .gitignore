@@ -31,3 +31,6 @@
 /public/production
 
 /.ruby-version
+
+/.idea/workspace.xml
+/.idea/remotestandup.iml
