@@ -42,7 +42,7 @@ describe IncomingMailer do
     end
 
     it 'includes the recipient email' do
-      mail.should have_body_text "I'm really sorry but you don't see to belong to the team."
+      mail.should have_body_text "I'm really sorry but you don't seem to belong to the team."
     end
   end
 end
