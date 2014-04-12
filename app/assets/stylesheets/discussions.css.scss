@@ -1,0 +1,12 @@
+.discussions-index.page {
+	.discussion {
+		position: relative;
+
+		.participants {
+			position: absolute;
+			top: 50%;
+			margin-top: -15px;
+			right: 25px;
+		}
+	}
+}
