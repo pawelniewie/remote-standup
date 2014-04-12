@@ -3,6 +3,9 @@
 		Notes
 	%small List of your daily entries
 
+.btn-group
+	%a.btn.btn-primary{href: 'mailto:' + @discussion.inbox_address} Add note
+
 - unless @notes.empty?
 	- @notes.each do |note|
 		.note

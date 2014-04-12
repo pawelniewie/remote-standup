@@ -67,4 +67,8 @@ class Discussion < ActiveRecord::Base
   	'Team Update from ' + Time.now.to_s(:year_month_day)
   end
 
+  def inbox_address
+  	"discussion+#{id}@in.remotestandup.com"
+  end
+
 end
