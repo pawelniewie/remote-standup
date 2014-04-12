@@ -2,61 +2,25 @@
   / Default Pricing Table
   %h2.title-divider
     %span
-      Pricing
-      %span.de-em Plans
-    %small Sign up in 20 seconds, upgrade, downgrade or cancel any time.
+      Our
+      %span.de-em pricing
+    %small Sign up in 20 seconds!
   / Stack 1
   .row.pricing-stack
-    .col-md-3
-      .well
-        %h3.title Personal
-        %p.price
-          %span.currency $
-          %span.digits
-            0
-          %span.term /MONTH
-        %ul.unstyled.points
-          %li 1 person
-          %li Unlimited storage
-          %li Email support
-    .col-md-3
+    .col-md-6.col-md-offset-3
       .well.active
         %h3.title
-          %span.em Starter
+          %span.em Plain and simple pricing
         %p.price
           %span.currency $
           %span.digits
-            10
-          %span.term /MONTH
+            3
+          %span.term PER USER MONTHLY
         %ul.unstyled.points
-          %li Up to 3 users
-          %li Unlimited storage
-          %li Email support
-    .col-md-3
-      .well.active
-        %h3.title
-          %span.em Team
-        %p.price
-          %span.currency $
-          %span.digits
-            40
-          %span.term /MONTH
-        %ul.unstyled.points
-          %li Up to 10 users
-          %li Unlimited storage
-          %li Email support
-    .col-md-3
-      .well
-        %h3.title
-          %span.em Enterprise
-        %p.price
-          %a{href: "mailto:#{contact_email}?Subject=Enterprise"}
-            %span.digits Contact
-            %span.term us
-        %ul.unstyled.points
-          %li Unlimited users
-          %li Unlimited storage
-          %li Email support
+          %li SSL encrypted connections
+          %li Unlimited number of updates
+          %li Cancel any time
+          %li Free for single user
   .row
     / Plan features
     .well.well-mini.pull-center
@@ -66,5 +30,5 @@
           = succeed ":" do
             %span.de-em for 30 days
       %p.inline-el.pad-left.muted
-        %a.btn.btn-primary{href: new_user_registration_path} Start Today! No credit card required
-        %p EU customers will be charged VAT at 23%
+        %a.btn.btn-primary{href: new_user_registration_path} Try it now!
+        %p Additionally VAT will be added if applies
