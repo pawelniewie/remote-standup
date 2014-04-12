@@ -6,15 +6,22 @@
 .btn-group
 	%a.btn.btn-primary{href: 'mailto:' + @current_user.team.team_inbox} Add update
 
+%p
+
 - unless @discussions.empty?
 	- @discussions.each do |discussion|
-		.note
-			%h5
-				%a{href: discussion_notes_url(discussion)}
-					=discussion.title
-				created
-				%time{'datetime' => discussion.created_at}
-					=discussion.created_at
+		.panel.panel-default.discussion
+			.panel-body
+				%h5
+					%a{href: discussion_notes_url(discussion)}
+						=discussion.title
+					created
+					%time{'datetime' => discussion.created_at}
+						=discussion.created_at
+			.participants
+				- discussion.notes.map { |note| note.user }.uniq.each do |user|
+					%a{href: "mailto:#{user.email}", title: user.calling_name.presence ? user.calling_name : user.email }
+						=image_tag user.gravatar_url(:size => 30), :class => 'img-circle'
 - else
 	%p
 		You don't have any discussions yet. Please
