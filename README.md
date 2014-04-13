@@ -12,6 +12,7 @@
 * gem install bundle
 * bundle install
 * gem install foreman
+* bin/rake db:schema:load
 * foreman start
 * You should be running in development mode
 
