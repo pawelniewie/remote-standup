@@ -1,3 +1,3 @@
 class MenuSection < SitePrism::Section
-  element :active, "li.active"
+  element :active_item, "li.active a"
 end
