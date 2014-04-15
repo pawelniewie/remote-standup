@@ -63,6 +63,7 @@ Spork.prefork do
     config.include Capybara::DSL, :type => :request
     config.include EmailSpec::Helpers
     config.include EmailSpec::Matchers
+    config.include Warden::Test::Helpers, :type => :feature
 
     # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
     # config.fixture_path = "#{::Rails.root}/spec/fixtures"

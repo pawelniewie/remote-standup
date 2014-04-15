@@ -30,6 +30,7 @@ FactoryGirl.define do
   factory :note do
   	association :user, :factory => :user
   	association :team, :factory => :team
+    note 'This is a note'
   end
 
 	factory :discussion do
