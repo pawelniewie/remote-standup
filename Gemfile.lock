@@ -209,6 +209,9 @@ GEM
     omniauth (1.2.1)
       hashie (>= 1.2, < 3)
       rack (~> 1.0)
+    omniauth-asana (0.0.1)
+      omniauth (~> 1.0)
+      omniauth-oauth2 (~> 1.1)
     omniauth-bitbucket (0.0.2)
       multi_json (~> 1.7)
       omniauth (~> 1.1)
@@ -408,6 +411,7 @@ DEPENDENCIES
   minitest
   mixpanel_client
   newrelic_rpm
+  omniauth-asana
   omniauth-bitbucket
   omniauth-facebook
   omniauth-github
