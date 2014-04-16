@@ -16,4 +16,8 @@ module ApplicationHelper
     [controller_name, action_name].join('-')
   end
 
+  def is_active? controller: controller, action: action
+  	controller_name == controller and (action.nil? or action_name == action)
+  end
+
 end
